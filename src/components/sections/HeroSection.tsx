@@ -18,7 +18,6 @@ export default function HeroSection() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-rose-pink/8 blur-3xl animate-pulse-glow" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-primary/10 blur-3xl animate-pulse-glow" />
       <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-golden-almond/12 blur-3xl" />
-      <div className="absolute bottom-1/3 left-1/3 w-48 h-48 rounded-full bg-secondary/30 blur-3xl" />
       
       {/* 3D Scene */}
       <div className="absolute inset-0 z-0">
@@ -28,7 +27,7 @@ export default function HeroSection() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-6 text-center pt-20 pb-28">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,7 +68,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Button 
               size="lg" 
@@ -89,11 +88,12 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
+        {/* Scroll indicator - positioned below buttons with spacing */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="mt-12"
         >
           <div className="flex flex-col items-center gap-2">
             <span className="text-sm text-muted-foreground">Scroll to explore</span>

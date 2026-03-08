@@ -30,32 +30,33 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="py-20 border-t border-border bg-dark-slate text-primary-foreground">
+    <footer
+      className="py-20 border-t"
+      style={{
+        background: 'linear-gradient(180deg, hsl(200, 18%, 15%) 0%, hsl(200, 20%, 12%) 100%)',
+        borderColor: 'hsla(335, 87%, 71%, 0.15)',
+      }}
+    >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div>
             <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => scrollToSection('#')}>
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-rose-pink to-primary flex items-center justify-center">
-                <img src="/images/logo.png" alt="Logo" className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement!.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>';
-                  }} />
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center shadow-lg">
+                <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain p-1" />
               </div>
               <div>
-                <div className="font-display font-bold text-xl text-primary-foreground">Welcome</div>
-                <div className="text-sm text-primary-foreground/60">Dry Fruit House</div>
+                <div className="font-display font-bold text-xl" style={{ color: 'hsl(30, 33%, 90%)' }}>Welcome</div>
+                <div className="text-sm" style={{ color: 'hsla(30, 33%, 85%, 0.6)' }}>Dry Fruit House</div>
               </div>
             </div>
-            <p className="text-primary-foreground/70 mb-6">Premium dry fruits for a healthy lifestyle. From our family to yours.</p>
+            <p className="mb-6" style={{ color: 'hsla(30, 33%, 85%, 0.7)' }}>Premium dry fruits for a healthy lifestyle. From our family to yours.</p>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2 text-primary-foreground/70">
-                <MapPin size={14} className="text-rose-pink" />
+              <div className="flex items-center gap-2" style={{ color: 'hsla(30, 33%, 85%, 0.7)' }}>
+                <MapPin size={14} className="text-rose-pink flex-shrink-0" />
                 <span>Bengaluru Road, Krishna Nagar, Kurnool-518003</span>
               </div>
-              <div className="flex items-center gap-2 text-primary-foreground/70">
-                <Clock size={14} className="text-rose-pink" />
+              <div className="flex items-center gap-2" style={{ color: 'hsla(30, 33%, 85%, 0.7)' }}>
+                <Clock size={14} className="text-rose-pink flex-shrink-0" />
                 <span>Open until 10:00 PM</span>
               </div>
             </div>
@@ -63,11 +64,17 @@ export default function Footer() {
 
           {(['products', 'company', 'support'] as const).map((section) => (
             <div key={section}>
-              <h3 className="font-display font-semibold text-lg mb-6 capitalize text-primary-foreground">{section}</h3>
+              <h3 className="font-display font-semibold text-lg mb-6 capitalize" style={{ color: 'hsl(30, 33%, 90%)' }}>{section}</h3>
               <ul className="space-y-3">
                 {footerLinks[section].map((link) => (
                   <li key={link.name}>
-                    <button onClick={() => scrollToSection(link.href)} className="text-primary-foreground/60 hover:text-rose-pink transition-colors">
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className="transition-colors duration-200"
+                      style={{ color: 'hsla(30, 33%, 85%, 0.55)' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'hsl(335, 87%, 71%)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'hsla(30, 33%, 85%, 0.55)')}
+                    >
                       {link.name}
                     </button>
                   </li>
@@ -77,14 +84,23 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-primary-foreground/50">&copy; {new Date().getFullYear()} Welcome Dry Fruit House. All rights reserved.</p>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid hsla(30, 33%, 85%, 0.1)' }}>
+          <p className="text-sm" style={{ color: 'hsla(30, 33%, 85%, 0.4)' }}>&copy; {new Date().getFullYear()} Welcome Dry Fruit House. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="text-sm text-primary-foreground/50">Follow us:</span>
+            <span className="text-sm" style={{ color: 'hsla(30, 33%, 85%, 0.4)' }}>Follow us:</span>
             <div className="flex gap-4">
-              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Youtube size={20} /></a>
+              {[Facebook, Instagram, Youtube].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="transition-colors duration-200"
+                  style={{ color: 'hsla(30, 33%, 85%, 0.4)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'hsl(335, 87%, 71%)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'hsla(30, 33%, 85%, 0.4)')}
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
