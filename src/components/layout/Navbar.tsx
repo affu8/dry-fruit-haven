@@ -120,7 +120,7 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-2 liquid-glass p-4 md:hidden flex flex-col gap-3 rounded-2xl"
+            className="mt-2 liquid-glass p-4 lg:hidden flex flex-col gap-3 rounded-2xl"
           >
             {navLinks.map((link) => (
               <button
