@@ -15,6 +15,11 @@ interface ProductCardProps {
   product: Product;
 }
 
+const scrollToContact = () => {
+  const el = document.querySelector('#contact');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
+
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <motion.div
@@ -31,35 +36,40 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-muted">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-6">
-            <div className="text-5xl mb-2">
-              {product.category === 'almonds' && '🌰'}
-              {product.category === 'cashews' && '🥜'}
-              {product.category === 'pistachios' && '🫛'}
-              {product.category === 'walnuts' && '🧠'}
-              {product.category === 'dates' && '🌴'}
-              {product.category === 'raisins' && '🍇'}
-              {product.category === 'mixed' && '🎁'}
-              {product.category === 'gift-hampers' && '🎀'}
-            </div>
-            <p className="text-xs text-muted-foreground">{product.image}</p>
-          </div>
-        </div>
-        
+        <img
+          src={`/images/products/${product.image}`}
+          alt={product.name}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+            const parent = target.parentElement;
+            if (parent) {
+              const fallback = document.createElement('div');
+              fallback.className = 'absolute inset-0 flex items-center justify-center';
+              const icons: Record<string, string> = {
+                almonds: '🌰', cashews: '🥜', pistachios: '🫛', walnuts: '🧠',
+                dates: '🌴', raisins: '🍇', mixed: '🎁', 'gift-hampers': '🎀'
+              };
+              fallback.innerHTML = `<div class="text-center p-6">
+                <div class="text-5xl mb-2">${icons[product.category] || '🌰'}</div>
+                <p class="text-xs text-muted-foreground">${product.image}</p>
+              </div>`;
+              parent.appendChild(fallback);
+            }
+          }}
+        />
+
         {/* Hover Overlay */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <Button 
-            size="sm" 
-            className="rounded-full bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity">
+          <Button
+            size="sm"
+            onClick={scrollToContact}
+            className="rounded-full bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground"
           >
             Quick Order
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Content */}
@@ -69,21 +79,22 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
         </div>
-        
+
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
           {product.description}
         </p>
 
         <div className="flex items-center justify-between">
-          <span className="text-xl font-display font-bold text-accent">
+          <span className="text-xl font-display font-bold text-secondary">
             {product.price}
           </span>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
+            onClick={scrollToContact}
             className="rounded-full border-primary/30 hover:bg-primary hover:text-primary-foreground"
           >
-            Add to Cart
+            Order Now
           </Button>
         </div>
       </div>

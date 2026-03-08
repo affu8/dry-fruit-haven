@@ -1,53 +1,13 @@
 {
   "categories": [
-    {
-      "id": "almonds",
-      "name": "Almonds",
-      "description": "Heart-healthy, vitamin E rich nuts",
-      "icon": "🌰"
-    },
-    {
-      "id": "cashews",
-      "name": "Cashews",
-      "description": "Creamy, energy-dense delights",
-      "icon": "🥜"
-    },
-    {
-      "id": "pistachios",
-      "name": "Pistachios",
-      "description": "Colorful, fiber-rich favorites",
-      "icon": "🫛"
-    },
-    {
-      "id": "walnuts",
-      "name": "Walnuts",
-      "description": "Brain-boosting omega-3 powerhouse",
-      "icon": "🧠"
-    },
-    {
-      "id": "dates",
-      "name": "Dates",
-      "description": "Natural sweetness with fiber",
-      "icon": "🌴"
-    },
-    {
-      "id": "raisins",
-      "name": "Raisins",
-      "description": "Energy-packed dried grapes",
-      "icon": "🍇"
-    },
-    {
-      "id": "mixed",
-      "name": "Mixed Dry Fruits",
-      "description": "Perfect blend of nutrition",
-      "icon": "🎁"
-    },
-    {
-      "id": "gift-hampers",
-      "name": "Gift Hampers",
-      "description": "Luxury gift collections",
-      "icon": "🎀"
-    }
+    { "id": "almonds", "name": "Almonds", "description": "Heart-healthy, vitamin E rich nuts", "icon": "🌰" },
+    { "id": "cashews", "name": "Cashews", "description": "Creamy, energy-dense delights", "icon": "🥜" },
+    { "id": "pistachios", "name": "Pistachios", "description": "Colorful, fiber-rich favorites", "icon": "🫛" },
+    { "id": "walnuts", "name": "Walnuts", "description": "Brain-boosting omega-3 powerhouse", "icon": "🧠" },
+    { "id": "dates", "name": "Dates", "description": "Natural sweetness with fiber", "icon": "🌴" },
+    { "id": "raisins", "name": "Raisins", "description": "Energy-packed dried grapes", "icon": "🍇" },
+    { "id": "mixed", "name": "Mixed Dry Fruits", "description": "Perfect blend of nutrition", "icon": "🎁" },
+    { "id": "gift-hampers", "name": "Gift Hampers", "description": "Luxury gift collections", "icon": "🎀" }
   ],
   "products": [
     {
@@ -56,7 +16,7 @@
       "category": "almonds",
       "price": "₹900/kg",
       "description": "Handpicked, crunchy California almonds rich in vitamin E",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "california-almonds.jpg",
       "featured": true
     },
     {
@@ -65,7 +25,7 @@
       "category": "almonds",
       "price": "₹1,800/kg",
       "description": "Traditional Iranian almonds with superior taste",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "mamra-almonds.jpg",
       "featured": false
     },
     {
@@ -74,7 +34,7 @@
       "category": "almonds",
       "price": "₹1,200/kg",
       "description": "Small, crunchy almonds with intense flavor",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "gurbandi-almonds.jpg",
       "featured": false
     },
     {
@@ -83,7 +43,7 @@
       "category": "cashews",
       "price": "₹1,100/kg",
       "description": "Whole white cashews, perfect for snacking",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "w240-cashews.jpg",
       "featured": true
     },
     {
@@ -92,7 +52,7 @@
       "category": "cashews",
       "price": "₹1,200/kg",
       "description": "Perfectly roasted with Himalayan pink salt",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "roasted-cashews.jpg",
       "featured": false
     },
     {
@@ -101,7 +61,7 @@
       "category": "pistachios",
       "price": "₹1,400/kg",
       "description": "Premium quality, naturally opened pistachios",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "iranian-pistachios.jpg",
       "featured": true
     },
     {
@@ -110,7 +70,7 @@
       "category": "pistachios",
       "price": "₹1,500/kg",
       "description": "Lightly salted for perfect crunch",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "salted-pistachios.jpg",
       "featured": false
     },
     {
@@ -119,7 +79,7 @@
       "category": "walnuts",
       "price": "₹1,000/kg",
       "description": "Light colored, mild flavored walnuts",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "chile-walnuts.jpg",
       "featured": true
     },
     {
@@ -128,7 +88,7 @@
       "category": "walnuts",
       "price": "₹800/kg",
       "description": "Traditional Kashmiri walnuts with shell",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "kashmiri-walnuts.jpg",
       "featured": false
     },
     {
@@ -137,7 +97,7 @@
       "category": "dates",
       "price": "₹1,600/kg",
       "description": "King of dates - soft, caramel-like sweetness",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "medjool-dates.jpg",
       "featured": true
     },
     {
@@ -146,7 +106,7 @@
       "category": "dates",
       "price": "₹2,200/kg",
       "description": "Sacred Madinah dates with unique taste",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "ajwa-dates.jpg",
       "featured": false
     },
     {
@@ -155,7 +115,7 @@
       "category": "raisins",
       "price": "₹400/kg",
       "description": "Sweet, seedless green raisins",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "green-kishmish.jpg",
       "featured": true
     },
     {
@@ -164,7 +124,7 @@
       "category": "raisins",
       "price": "₹450/kg",
       "description": "Rich in iron, perfect for health",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "black-raisins.jpg",
       "featured": false
     },
     {
@@ -173,7 +133,7 @@
       "category": "mixed",
       "price": "₹950/kg",
       "description": "Perfect blend of almonds, cashews, pistachios, and raisins",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "mixed-dry-fruits.jpg",
       "featured": true
     },
     {
@@ -182,7 +142,7 @@
       "category": "mixed",
       "price": "₹750/kg",
       "description": "Nuts, seeds, and dried fruits for energy",
-      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "image": "trail-mix.jpg",
       "featured": false
     },
     {
@@ -191,7 +151,7 @@
       "category": "gift-hampers",
       "price": "₹2,500",
       "description": "Luxury assortment in elegant packaging",
-      "image": "[GIFT_HAMPER_IMAGE]",
+      "image": "royal-gift-hamper.jpg",
       "featured": true
     },
     {
@@ -200,7 +160,7 @@
       "category": "gift-hampers",
       "price": "₹1,800",
       "description": "Perfect for Diwali, weddings, and occasions",
-      "image": "[GIFT_HAMPER_IMAGE]",
+      "image": "festive-hamper.jpg",
       "featured": false
     }
   ]

@@ -3,6 +3,11 @@ import { Suspense } from 'react';
 import DryFruitScene from '../three/DryFruitScene';
 import { Button } from '../ui/button';
 
+const scrollToSection = (href: string) => {
+  const el = document.querySelector(href);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -12,7 +17,6 @@ export default function HeroSection() {
       {/* Animated Gradient Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/20 blur-3xl animate-pulse-glow" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-secondary/30 blur-3xl animate-pulse-glow delay-1000" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-3xl" />
       
       {/* 3D Scene */}
       <div className="absolute inset-0 z-0">
@@ -36,7 +40,7 @@ export default function HeroSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass-panel border border-primary/30"
           >
-            <span className="w-2 h-2 rounded-full bg-pistachio-green animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-sm text-muted-foreground">Premium Quality Since Day One</span>
           </motion.div>
 
@@ -71,6 +75,7 @@ export default function HeroSection() {
           >
             <Button 
               size="lg" 
+              onClick={() => scrollToSection('#products')}
               className="text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity glow-purple"
             >
               Explore Products
@@ -78,7 +83,8 @@ export default function HeroSection() {
             <Button 
               size="lg" 
               variant="outline"
-              className="text-lg px-8 py-6 rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all"
+              onClick={() => scrollToSection('#contact')}
+              className="text-lg px-8 py-6 rounded-full border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all"
             >
               Order Now
             </Button>
@@ -98,7 +104,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, 12, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-2 h-2 rounded-full bg-accent"
+                className="w-2 h-2 rounded-full bg-secondary"
               />
             </div>
           </div>
