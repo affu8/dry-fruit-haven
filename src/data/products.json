@@ -1,0 +1,207 @@
+{
+  "categories": [
+    {
+      "id": "almonds",
+      "name": "Almonds",
+      "description": "Heart-healthy, vitamin E rich nuts",
+      "icon": "🌰"
+    },
+    {
+      "id": "cashews",
+      "name": "Cashews",
+      "description": "Creamy, energy-dense delights",
+      "icon": "🥜"
+    },
+    {
+      "id": "pistachios",
+      "name": "Pistachios",
+      "description": "Colorful, fiber-rich favorites",
+      "icon": "🫛"
+    },
+    {
+      "id": "walnuts",
+      "name": "Walnuts",
+      "description": "Brain-boosting omega-3 powerhouse",
+      "icon": "🧠"
+    },
+    {
+      "id": "dates",
+      "name": "Dates",
+      "description": "Natural sweetness with fiber",
+      "icon": "🌴"
+    },
+    {
+      "id": "raisins",
+      "name": "Raisins",
+      "description": "Energy-packed dried grapes",
+      "icon": "🍇"
+    },
+    {
+      "id": "mixed",
+      "name": "Mixed Dry Fruits",
+      "description": "Perfect blend of nutrition",
+      "icon": "🎁"
+    },
+    {
+      "id": "gift-hampers",
+      "name": "Gift Hampers",
+      "description": "Luxury gift collections",
+      "icon": "🎀"
+    }
+  ],
+  "products": [
+    {
+      "id": "premium-almonds",
+      "name": "Premium California Almonds",
+      "category": "almonds",
+      "price": "₹900/kg",
+      "description": "Handpicked, crunchy California almonds rich in vitamin E",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "mamra-almonds",
+      "name": "Mamra Almonds",
+      "category": "almonds",
+      "price": "₹1,800/kg",
+      "description": "Traditional Iranian almonds with superior taste",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "gurbandi-almonds",
+      "name": "Gurbandi Almonds",
+      "category": "almonds",
+      "price": "₹1,200/kg",
+      "description": "Small, crunchy almonds with intense flavor",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "premium-cashews",
+      "name": "Premium W240 Cashews",
+      "category": "cashews",
+      "price": "₹1,100/kg",
+      "description": "Whole white cashews, perfect for snacking",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "roasted-cashews",
+      "name": "Roasted & Salted Cashews",
+      "category": "cashews",
+      "price": "₹1,200/kg",
+      "description": "Perfectly roasted with Himalayan pink salt",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "premium-pistachios",
+      "name": "Iranian Pistachios",
+      "category": "pistachios",
+      "price": "₹1,400/kg",
+      "description": "Premium quality, naturally opened pistachios",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "salted-pistachios",
+      "name": "Roasted Salted Pistachios",
+      "category": "pistachios",
+      "price": "₹1,500/kg",
+      "description": "Lightly salted for perfect crunch",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "premium-walnuts",
+      "name": "Chile Walnuts",
+      "category": "walnuts",
+      "price": "₹1,000/kg",
+      "description": "Light colored, mild flavored walnuts",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "kashmiri-walnuts",
+      "name": "Kashmiri Walnuts",
+      "category": "walnuts",
+      "price": "₹800/kg",
+      "description": "Traditional Kashmiri walnuts with shell",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "medjool-dates",
+      "name": "Medjool Dates",
+      "category": "dates",
+      "price": "₹1,600/kg",
+      "description": "King of dates - soft, caramel-like sweetness",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "ajwa-dates",
+      "name": "Ajwa Dates",
+      "category": "dates",
+      "price": "₹2,200/kg",
+      "description": "Sacred Madinah dates with unique taste",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "premium-raisins",
+      "name": "Green Kishmish",
+      "category": "raisins",
+      "price": "₹400/kg",
+      "description": "Sweet, seedless green raisins",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "black-raisins",
+      "name": "Black Raisins",
+      "category": "raisins",
+      "price": "₹450/kg",
+      "description": "Rich in iron, perfect for health",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "mixed-premium",
+      "name": "Premium Mixed Dry Fruits",
+      "category": "mixed",
+      "price": "₹950/kg",
+      "description": "Perfect blend of almonds, cashews, pistachios, and raisins",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": true
+    },
+    {
+      "id": "trail-mix",
+      "name": "Healthy Trail Mix",
+      "category": "mixed",
+      "price": "₹750/kg",
+      "description": "Nuts, seeds, and dried fruits for energy",
+      "image": "[PRODUCT_IMAGE_PLACEHOLDER]",
+      "featured": false
+    },
+    {
+      "id": "royal-hamper",
+      "name": "Royal Gift Hamper",
+      "category": "gift-hampers",
+      "price": "₹2,500",
+      "description": "Luxury assortment in elegant packaging",
+      "image": "[GIFT_HAMPER_IMAGE]",
+      "featured": true
+    },
+    {
+      "id": "festive-hamper",
+      "name": "Festive Celebration Box",
+      "category": "gift-hampers",
+      "price": "₹1,800",
+      "description": "Perfect for Diwali, weddings, and occasions",
+      "image": "[GIFT_HAMPER_IMAGE]",
+      "featured": false
+    }
+  ]
+}
