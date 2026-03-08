@@ -5,7 +5,7 @@ import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { MapPin, Clock, Package, Phone, Send, CheckCircle, Loader2, User, Mail, Calendar, MessageSquare, ShoppingBag, Home, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
 
-const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwc0adckJBBmNqyThgIitMWukDRPUbqWCwHmJXqLmdQfPV_dbpVAktkiLgHTaBzW6N3/exec';
 
 interface FormData {
   name: string;
