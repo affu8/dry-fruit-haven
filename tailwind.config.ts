@@ -63,6 +63,8 @@ export default {
         },
         "warm-cream": "hsl(var(--warm-cream))",
         "steel-blue": "hsl(var(--steel-blue))",
+        "rose-pink": "hsl(var(--rose-pink))",
+        "dark-slate": "hsl(var(--dark-slate))",
         "golden-almond": "hsl(var(--golden-almond))",
         "cashew-cream": "hsl(var(--cashew-cream))",
         "pistachio-green": "hsl(var(--pistachio-green))",

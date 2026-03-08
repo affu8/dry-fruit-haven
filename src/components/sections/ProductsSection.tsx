@@ -1,7 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import productsData from '../../data/products.json';
 import ProductCard from '../ui/ProductCard';
+import { Button } from '../ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const { categories, products } = productsData;
 
@@ -9,15 +12,16 @@ export default function ProductsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState('all');
+  const navigate = useNavigate();
 
   const filteredProducts = activeCategory === 'all'
-    ? products
-    : products.filter(p => p.category === activeCategory);
+    ? products.slice(0, 8)
+    : products.filter(p => p.category === activeCategory).slice(0, 8);
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-secondary/10 blur-3xl" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full bg-accent/5 blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-primary/8 blur-3xl" />
 
       <div className="container mx-auto px-6">
         <motion.div
@@ -26,13 +30,12 @@ export default function ProductsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-4 block">Our Collection</span>
+          <span className="text-accent font-medium mb-4 block">Our Collection</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Premium <span className="gradient-text">Dry Fruits</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Handpicked from the finest orchards, each product is a promise of quality,
-            freshness, and natural goodness.
+            Handpicked from the finest orchards, each product is a promise of quality.
           </p>
         </motion.div>
 
@@ -46,7 +49,7 @@ export default function ProductsSection() {
             onClick={() => setActiveCategory('all')}
             className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
               activeCategory === 'all'
-                ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                ? 'bg-gradient-to-r from-accent to-primary text-accent-foreground shadow-md'
                 : 'clay-card hover:shadow-lg'
             }`}
           >
@@ -58,7 +61,7 @@ export default function ProductsSection() {
               onClick={() => setActiveCategory(category.id)}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                  ? 'bg-gradient-to-r from-accent to-primary text-accent-foreground shadow-md'
                   : 'clay-card hover:shadow-lg'
               }`}
             >
@@ -82,6 +85,20 @@ export default function ProductsSection() {
               <ProductCard product={product} />
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12"
+        >
+          <Button
+            onClick={() => navigate('/products')}
+            className="rounded-full bg-gradient-to-r from-accent to-primary text-accent-foreground hover:opacity-90 px-8 py-5 text-base shadow-lg"
+          >
+            View All Products <ArrowRight size={18} className="ml-2" />
+          </Button>
         </motion.div>
       </div>
     </section>
