@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       )}
 
-      <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-secondary/30">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl bg-secondary/30">
         <img
           src={`/images/products/${product.image}`}
           alt={product.name}
