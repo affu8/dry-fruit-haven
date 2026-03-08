@@ -54,7 +54,6 @@ function Torus({ position, color, scale = 1 }: { position: [number, number, numb
     <Float speed={1.8} rotationIntensity={0.6} floatIntensity={1}>
       <mesh ref={meshRef} position={position} scale={scale} castShadow>
         <torusGeometry args={[0.35, 0.15, 16, 32]} />
-        {/* @ts-ignore */}
         <meshStandardMaterial color={color} roughness={0.15} metalness={0.25} />
       </mesh>
     </Float>
@@ -89,16 +88,16 @@ function Scene() {
   });
 
   const objects = useMemo(() => [
-    { type: 'orb', position: [-2.8, 1.2, -0.5] as [number, number, number], color: '#6E86AB', scale: 0.9 },
-    { type: 'orb', position: [3, -0.8, -1] as [number, number, number], color: '#E9D9C9', scale: 1.1 },
-    { type: 'cube', position: [2.2, 1.8, 0.5] as [number, number, number], color: '#D4A574', scale: 0.7 },
-    { type: 'cube', position: [-1.8, -1.5, 0.8] as [number, number, number], color: '#8BAA7C', scale: 0.6 },
+    { type: 'orb', position: [-2.8, 1.2, -0.5] as [number, number, number], color: '#F576AE', scale: 0.9 },
+    { type: 'orb', position: [3, -0.8, -1] as [number, number, number], color: '#6E86AB', scale: 1.1 },
+    { type: 'cube', position: [2.2, 1.8, 0.5] as [number, number, number], color: '#E9D9C9', scale: 0.7 },
+    { type: 'cube', position: [-1.8, -1.5, 0.8] as [number, number, number], color: '#F576AE', scale: 0.6 },
     { type: 'torus', position: [0.5, 2.2, -0.5] as [number, number, number], color: '#6E86AB', scale: 1 },
-    { type: 'torus', position: [-2.5, -0.5, -0.3] as [number, number, number], color: '#C9956C', scale: 0.8 },
+    { type: 'torus', position: [-2.5, -0.5, -0.3] as [number, number, number], color: '#242E32', scale: 0.8 },
     { type: 'capsule', position: [1.5, -1.8, 0.2] as [number, number, number], color: '#E9D9C9', scale: 0.9 },
-    { type: 'capsule', position: [-0.8, 1, 1] as [number, number, number], color: '#D4A574', scale: 0.7 },
-    { type: 'orb', position: [0, -2, -0.8] as [number, number, number], color: '#8BAA7C', scale: 0.5 },
-    { type: 'cube', position: [-0.3, -0.3, 1.5] as [number, number, number], color: '#6E86AB', scale: 0.4 },
+    { type: 'capsule', position: [-0.8, 1, 1] as [number, number, number], color: '#F576AE', scale: 0.7 },
+    { type: 'orb', position: [0, -2, -0.8] as [number, number, number], color: '#6E86AB', scale: 0.5 },
+    { type: 'cube', position: [-0.3, -0.3, 1.5] as [number, number, number], color: '#242E32', scale: 0.4 },
   ], []);
 
   return (
@@ -112,8 +111,8 @@ function Scene() {
           default: return null;
         }
       })}
-      <Sparkles count={60} scale={12} size={1.5} speed={0.3} color="#6E86AB" opacity={0.3} />
-      <Sparkles count={30} scale={10} size={2} speed={0.2} color="#E9D9C9" opacity={0.4} />
+      <Sparkles count={60} scale={12} size={1.5} speed={0.3} color="#F576AE" opacity={0.3} />
+      <Sparkles count={30} scale={10} size={2} speed={0.2} color="#6E86AB" opacity={0.4} />
     </group>
   );
 }
@@ -123,7 +122,7 @@ export default function DryFruitScene() {
     <Canvas camera={{ position: [0, 0, 8], fov: 45 }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} castShadow />
-      <pointLight position={[-5, -5, -5]} intensity={0.4} color="#E9D9C9" />
+      <pointLight position={[-5, -5, -5]} intensity={0.4} color="#F576AE" />
       <pointLight position={[5, -5, 5]} intensity={0.3} color="#6E86AB" />
       <pointLight position={[0, 5, 0]} intensity={0.2} color="#ffffff" />
       <Scene />

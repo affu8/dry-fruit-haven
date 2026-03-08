@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SplashScreen from '../components/SplashScreen';
+import CustomCursor from '../components/CustomCursor';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import HeroSection from '../components/sections/HeroSection';
@@ -21,6 +22,7 @@ const Index = () => {
 
   return (
     <>
+      <CustomCursor />
       <AnimatePresence>
         {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       </AnimatePresence>

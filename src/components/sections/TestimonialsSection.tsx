@@ -15,7 +15,7 @@ export default function TestimonialsSection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden bg-card">
-      <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-secondary/15 blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-rose-pink/8 blur-3xl -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="container mx-auto px-6">
@@ -25,7 +25,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-4 block">What People Say</span>
+          <span className="text-rose-pink font-medium mb-4 block">What People Say</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Customer <span className="gradient-text">Love</span>
           </h2>
@@ -41,7 +41,7 @@ export default function TestimonialsSection() {
               className="clay-card p-8 relative"
             >
               <div className="absolute top-6 right-6">
-                <Quote size={28} className="text-primary/15" />
+                <Quote size={28} className="text-rose-pink/20" />
               </div>
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_, i) => (
@@ -50,8 +50,8 @@ export default function TestimonialsSection() {
               </div>
               <p className="text-lg text-foreground mb-6 italic leading-relaxed">"{t.quote}"</p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/15 to-secondary/30 flex items-center justify-center">
-                  <User size={20} className="text-primary" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-rose-pink/20 to-primary/20 flex items-center justify-center">
+                  <User size={20} className="text-rose-pink" />
                 </div>
                 <div>
                   <div className="font-display font-semibold text-foreground">{t.name}</div>

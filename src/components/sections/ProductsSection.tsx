@@ -16,8 +16,8 @@ export default function ProductsSection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-secondary/10 blur-3xl" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full bg-rose-pink/5 blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-primary/8 blur-3xl" />
 
       <div className="container mx-auto px-6">
         <motion.div
@@ -26,7 +26,7 @@ export default function ProductsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-4 block">Our Collection</span>
+          <span className="text-rose-pink font-medium mb-4 block">Our Collection</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Premium <span className="gradient-text">Dry Fruits</span>
           </h2>
@@ -46,7 +46,7 @@ export default function ProductsSection() {
             onClick={() => setActiveCategory('all')}
             className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
               activeCategory === 'all'
-                ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                ? 'bg-gradient-to-r from-rose-pink to-primary text-primary-foreground shadow-md'
                 : 'clay-card hover:shadow-lg'
             }`}
           >
@@ -58,7 +58,7 @@ export default function ProductsSection() {
               onClick={() => setActiveCategory(category.id)}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                  ? 'bg-gradient-to-r from-rose-pink to-primary text-primary-foreground shadow-md'
                   : 'clay-card hover:shadow-lg'
               }`}
             >
