@@ -33,8 +33,8 @@ export default function Footer() {
     <footer
       className="py-20 border-t"
       style={{
-        background: 'linear-gradient(180deg, hsl(200, 18%, 15%) 0%, hsl(200, 20%, 12%) 100%)',
-        borderColor: 'hsla(335, 87%, 71%, 0.15)',
+        background: 'linear-gradient(180deg, hsl(210, 15%, 18%) 0%, hsl(210, 18%, 14%) 100%)',
+        borderColor: 'hsla(30, 33%, 85%, 0.08)',
       }}
     >
       <div className="container mx-auto px-6">

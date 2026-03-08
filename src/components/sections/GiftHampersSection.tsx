@@ -66,11 +66,17 @@ export default function GiftHampersSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-rose-pink/10 via-primary/10 to-secondary/15 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
               <div className="relative clay-card overflow-hidden">
-                <div className="aspect-[4/3] bg-secondary/20 overflow-hidden">
+                <div className="aspect-[4/3] bg-secondary/20 overflow-hidden rounded-t-[1.5rem]">
                   <img
                     src={`/images/hampers/${hamper.image}`}
                     alt={hamper.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/images/products/royal-gift-hamper.jpg';
+                    }}
                   />
                 </div>
 
