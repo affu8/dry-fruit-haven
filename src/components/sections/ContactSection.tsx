@@ -39,7 +39,7 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      if (GOOGLE_SHEETS_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+      if (GOOGLE_SHEETS_URL.length > 0) {
         await fetch(GOOGLE_SHEETS_URL, {
           method: 'POST',
           mode: 'no-cors',
