@@ -63,15 +63,15 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="p-6">
-        <h3 className="font-display font-semibold text-lg leading-tight group-hover:text-rose-pink transition-colors text-foreground">
+      <div className="p-4">
+        <h3 className="font-display font-semibold text-base leading-tight group-hover:text-rose-pink transition-colors text-foreground">
           {product.name}
         </h3>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2 mt-2">
+        <p className="text-xs text-muted-foreground mb-3 line-clamp-2 mt-1.5">
           {product.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-xl font-display font-bold text-rose-pink">
+          <span className="text-lg font-display font-bold text-rose-pink">
             {product.price}
           </span>
           <Button
