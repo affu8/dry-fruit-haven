@@ -5,29 +5,29 @@
 @tailwind utilities;
 
 /* Welcome Dry Fruit House - Light & Colorful Design System */
-/* Brand Colors: #E9D9C9 (Warm Cream) & #6E86AB (Steel Blue) */
+/* Brand Colors: #E9D9C9 (Warm Cream), #6E86AB (Steel Blue), #F576AE (Rose Pink), #242E32 (Dark Slate) */
 
 @layer base {
   :root {
     --background: 30 30% 97%;
-    --foreground: 220 20% 15%;
+    --foreground: 200 16% 16%;
 
     --card: 30 25% 95%;
-    --card-foreground: 220 20% 15%;
+    --card-foreground: 200 16% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 200 16% 16%;
 
     --primary: 216 26% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 30 33% 85%;
-    --secondary-foreground: 220 20% 15%;
+    --secondary-foreground: 200 16% 16%;
 
     --muted: 30 15% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted-foreground: 200 10% 45%;
 
-    --accent: 216 26% 55%;
+    --accent: 338 87% 71%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -42,6 +42,8 @@
     /* Brand tokens */
     --warm-cream: 30 33% 85%;
     --steel-blue: 216 26% 55%;
+    --rose-pink: 338 87% 71%;
+    --dark-slate: 200 16% 16%;
     --golden-almond: 38 60% 65%;
     --cashew-cream: 35 45% 82%;
     --pistachio-green: 140 35% 50%;
@@ -50,22 +52,25 @@
     --soft-rose: 10 40% 80%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(216, 26%, 55%) 0%, hsl(30, 33%, 85%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(216, 26%, 55%) 0%, hsl(338, 87%, 71%) 50%, hsl(30, 33%, 85%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(30, 25%, 96%) 100%);
     --gradient-glass: linear-gradient(135deg, hsla(0, 0%, 100%, 0.7) 0%, hsla(0, 0%, 100%, 0.4) 100%);
+    --gradient-rose: linear-gradient(135deg, hsl(338, 87%, 71%) 0%, hsl(216, 26%, 55%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(30, 33%, 85%) 0%, hsl(338, 87%, 80%) 100%);
 
     /* Shadows */
     --shadow-glow: 0 0 60px hsla(216, 26%, 55%, 0.15);
-    --shadow-card: 0 10px 40px -12px hsla(220, 20%, 15%, 0.08);
+    --shadow-card: 0 10px 40px -12px hsla(200, 16%, 16%, 0.08);
     --shadow-product: 0 20px 40px -10px hsla(216, 26%, 55%, 0.12);
-    --shadow-float: 0 20px 50px -15px hsla(220, 20%, 15%, 0.1);
+    --shadow-float: 0 20px 50px -15px hsla(200, 16%, 16%, 0.1);
+    --shadow-rose: 0 10px 30px -8px hsla(338, 87%, 71%, 0.2);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 216 26% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 30 25% 95%;
-    --sidebar-accent-foreground: 220 20% 15%;
+    --sidebar-accent-foreground: 200 16% 16%;
     --sidebar-border: 30 15% 85%;
     --sidebar-ring: 216 26% 55%;
   }
@@ -91,15 +96,26 @@
     @apply backdrop-blur-xl rounded-2xl;
     background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.5) 100%);
     border: 1px solid hsla(0, 0%, 100%, 0.6);
-    box-shadow: 0 8px 32px hsla(220, 20%, 15%, 0.06);
+    box-shadow: 0 8px 32px hsla(200, 16%, 16%, 0.06);
   }
 
   .glow-blue {
     box-shadow: 0 0 40px hsla(216, 26%, 55%, 0.2);
   }
 
+  .glow-rose {
+    box-shadow: 0 0 40px hsla(338, 87%, 71%, 0.2);
+  }
+
   .gradient-text {
     background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-rose {
+    background: var(--gradient-rose);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -137,8 +153,15 @@
   .clay-card {
     background: linear-gradient(145deg, hsl(30, 30%, 97%), hsl(30, 25%, 93%));
     border-radius: 1.5rem;
-    box-shadow: 8px 8px 20px hsla(220, 15%, 70%, 0.15), -8px -8px 20px hsla(0, 0%, 100%, 0.8);
+    box-shadow: 8px 8px 20px hsla(200, 16%, 70%, 0.15), -8px -8px 20px hsla(0, 0%, 100%, 0.8);
     border: 1px solid hsla(0, 0%, 100%, 0.5);
+  }
+
+  .clay-card-rose {
+    background: linear-gradient(145deg, hsl(338, 60%, 96%), hsl(338, 40%, 92%));
+    border-radius: 1.5rem;
+    box-shadow: 8px 8px 20px hsla(338, 40%, 70%, 0.12), -8px -8px 20px hsla(0, 0%, 100%, 0.8);
+    border: 1px solid hsla(338, 87%, 90%, 0.4);
   }
 
   .liquid-glass {
