@@ -3,26 +3,10 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const features = [
-  {
-    icon: '🌱',
-    title: 'Premium Sourcing',
-    description: 'Handpicked from trusted orchards with farm-to-home traceability'
-  },
-  {
-    icon: '✨',
-    title: 'Freshness Guaranteed',
-    description: 'Temperature-controlled storage in airtight, tamper-proof containers'
-  },
-  {
-    icon: '💎',
-    title: 'Trusted Quality',
-    description: 'Consistent quality built over years with personal care'
-  },
-  {
-    icon: '❤️',
-    title: 'Family Values',
-    description: 'Every customer treated like family, every pack made with love'
-  }
+  { icon: '🌱', title: 'Premium Sourcing', description: 'Handpicked from trusted orchards with farm-to-home traceability' },
+  { icon: '✨', title: 'Freshness Guaranteed', description: 'Temperature-controlled storage in airtight, tamper-proof containers' },
+  { icon: '💎', title: 'Trusted Quality', description: 'Consistent quality built over years with personal care' },
+  { icon: '❤️', title: 'Family Values', description: 'Every customer treated like family, every pack made with love' }
 ];
 
 export default function BrandIntroSection() {
@@ -31,13 +15,11 @@ export default function BrandIntroSection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-accent/5 blur-3xl" />
 
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Text Content */}
+          {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -55,24 +37,21 @@ export default function BrandIntroSection() {
             </p>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Today, in our sparkling clean warehouse, each batch of dry fruits is sorted and 
-              sealed with care. We still imagine the scent of roasted nuts in the air, and every 
-              fresh crate of dates arriving feels like the next chapter of our family story.
+              sealed with care.
             </p>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-accent">1+</div>
-                <div className="text-sm text-muted-foreground">Years of Trust</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-accent">100%</div>
-                <div className="text-sm text-muted-foreground">Pure & Natural</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-accent">50+</div>
-                <div className="text-sm text-muted-foreground">Products</div>
-              </div>
+              {[
+                { val: '1+', label: 'Years of Trust' },
+                { val: '100%', label: 'Pure & Natural' },
+                { val: '50+', label: 'Products' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-3xl font-display font-bold text-secondary">{stat.val}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </motion.div>
 

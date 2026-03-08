@@ -8,13 +8,12 @@ export default function OwnerStorySection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden bg-muted/30">
-      {/* Decorative Elements */}
       <div className="absolute top-1/2 left-0 w-64 h-64 rounded-full bg-primary/10 blur-3xl -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image Placeholder */}
+          {/* Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -22,21 +21,27 @@ export default function OwnerStorySection() {
             className="relative"
           >
             <div className="relative aspect-square max-w-md mx-auto">
-              {/* Decorative Border */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary via-secondary to-accent p-1">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary via-secondary to-primary p-1">
                 <div className="w-full h-full rounded-3xl bg-background" />
               </div>
               
-              {/* Image Placeholder */}
-              <div className="absolute inset-4 rounded-2xl bg-muted flex items-center justify-center overflow-hidden">
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">👨‍💼</div>
-                  <p className="text-muted-foreground text-sm">[OWNER_PROFILE_IMAGE]</p>
-                  <p className="text-muted-foreground text-xs mt-2">Founder, Welcome Dry Fruit House</p>
-                </div>
+              <div className="absolute inset-4 rounded-2xl bg-muted overflow-hidden">
+                <img
+                  src="/images/owner-profile.jpg"
+                  alt="Founder, Welcome Dry Fruit House"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = `<div class="flex items-center justify-center w-full h-full text-center p-8">
+                      <div><div class="text-6xl mb-4">👨‍💼</div>
+                      <p class="text-muted-foreground text-sm">owner-profile.jpg</p>
+                      <p class="text-muted-foreground text-xs mt-2">Founder, Welcome Dry Fruit House</p></div>
+                    </div>`;
+                  }}
+                />
               </div>
 
-              {/* Floating Elements */}
               <motion.div
                 animate={{ y: [-10, 10, -10] }}
                 transition={{ duration: 4, repeat: Infinity }}
@@ -69,21 +74,18 @@ export default function OwnerStorySection() {
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
                 In the early days, our founder carefully handpicked almonds, cashews, and pistachios 
-                from trusted orchards, driven by values of honesty and quality. Over time, our humble 
-                stall transformed into a premium store, but we never lost that personal touch.
+                from trusted orchards, driven by values of honesty and quality.
               </p>
               <p>
                 Every decision – from sourcing to packaging – is guided by honesty, hard work, and 
-                an unshakable commitment to quality. Our team visits the orchards and processing 
-                facilities personally, ensuring each nut and berry meets strict purity standards.
+                an unshakable commitment to quality.
               </p>
               <p>
                 Our mission is simple: to make healthy eating joyful. We believe every family 
-                deserves access to pure, premium dry fruits that nourish the body and soul.
+                deserves access to pure, premium dry fruits.
               </p>
             </div>
 
-            {/* Quote */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -92,7 +94,7 @@ export default function OwnerStorySection() {
             >
               <p className="text-xl font-display italic text-foreground">
                 "Trust isn't built through packaging or price. It's built over years – when the 
-                quality is consistent, the service is personal, and the experience is seamless."
+                quality is consistent and the experience is seamless."
               </p>
             </motion.div>
           </motion.div>

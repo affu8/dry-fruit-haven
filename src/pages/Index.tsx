@@ -1,3 +1,6 @@
+import { useState, useCallback } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import SplashScreen from '../components/SplashScreen';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import HeroSection from '../components/sections/HeroSection';
@@ -10,21 +13,48 @@ import TestimonialsSection from '../components/sections/TestimonialsSection';
 import ContactSection from '../components/sections/ContactSection';
 
 const Index = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  const handleSplashComplete = useCallback(() => {
+    setShowSplash(false);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <BrandIntroSection />
-        <OwnerStorySection />
-        <ProductsSection />
-        <HealthBenefitsSection />
-        <GiftHampersSection />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <AnimatePresence>
+        {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      </AnimatePresence>
+      
+      {!showSplash && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen bg-background text-foreground overflow-x-hidden"
+        >
+          <Navbar />
+          <main>
+            <HeroSection />
+            <div id="about">
+              <BrandIntroSection />
+            </div>
+            <div id="story">
+              <OwnerStorySection />
+            </div>
+            <div id="products">
+              <ProductsSection />
+            </div>
+            <HealthBenefitsSection />
+            <GiftHampersSection />
+            <TestimonialsSection />
+            <div id="contact">
+              <ContactSection />
+            </div>
+          </main>
+          <Footer />
+        </motion.div>
+      )}
+    </>
   );
 };
 
