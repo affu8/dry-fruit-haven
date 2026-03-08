@@ -31,9 +31,8 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6">
         <div className="liquid-glass px-6 py-4 flex items-center justify-between rounded-2xl">
-          {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('#')}>
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-rose-pink to-primary flex items-center justify-center">
               <img
                 src="/images/logo.png"
                 alt="Welcome Dry Fruit House"
@@ -51,28 +50,25 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-rose-pink transition-colors"
               >
                 {link.name}
               </button>
             ))}
           </div>
 
-          {/* CTA Button */}
           <button
             onClick={() => scrollToSection('#contact')}
-            className="hidden sm:block px-6 py-2 rounded-full bg-gradient-to-r from-primary to-steel-blue text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity shadow-md"
+            className="hidden sm:block px-6 py-2 rounded-full bg-gradient-to-r from-rose-pink to-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity shadow-md"
           >
             Order Now
           </button>
 
-          {/* Mobile Menu Toggle */}
           <button
             className="md:hidden text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -81,7 +77,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -92,14 +87,14 @@ export default function Navbar() {
               <button
                 key={link.name}
                 onClick={() => { scrollToSection(link.href); setMobileOpen(false); }}
-                className="text-left text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
+                className="text-left text-sm font-medium text-muted-foreground hover:text-rose-pink transition-colors py-2"
               >
                 {link.name}
               </button>
             ))}
             <button
               onClick={() => { scrollToSection('#contact'); setMobileOpen(false); }}
-              className="mt-2 px-6 py-2 rounded-full bg-gradient-to-r from-primary to-steel-blue text-primary-foreground text-sm font-medium"
+              className="mt-2 px-6 py-2 rounded-full bg-gradient-to-r from-rose-pink to-primary text-primary-foreground text-sm font-medium"
             >
               Order Now
             </button>

@@ -17,8 +17,8 @@ export default function HealthBenefitsSection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden bg-card">
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-secondary/15 blur-3xl" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-rose-pink/5 blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-primary/8 blur-3xl" />
 
       <div className="container mx-auto px-6">
         <motion.div
@@ -27,7 +27,7 @@ export default function HealthBenefitsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-4 block">Nature's Powerhouse</span>
+          <span className="text-rose-pink font-medium mb-4 block">Nature's Powerhouse</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Health <span className="gradient-text">Benefits</span>
           </h2>
@@ -47,15 +47,15 @@ export default function HealthBenefitsSection() {
               className="clay-card p-8 hover:shadow-lg transition-all group"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/20">
-                  <item.icon size={26} className="text-primary" />
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-rose-pink/15 to-primary/15">
+                  <item.icon size={26} className="text-rose-pink" />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-foreground">{item.name}</h3>
               </div>
               <p className="text-muted-foreground mb-6">{item.description}</p>
               <div className="flex flex-wrap gap-2">
                 {item.benefits.map((benefit) => (
-                  <span key={benefit} className="px-3 py-1 rounded-full text-xs font-medium bg-secondary/50 text-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <span key={benefit} className="px-3 py-1 rounded-full text-xs font-medium bg-soft-rose/30 text-foreground group-hover:bg-rose-pink/15 group-hover:text-rose-pink transition-colors">
                     {benefit}
                   </span>
                 ))}

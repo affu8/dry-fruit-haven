@@ -30,13 +30,12 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="py-20 border-t border-border bg-card">
+    <footer className="py-20 border-t border-border" style={{ background: 'linear-gradient(180deg, hsl(30, 25%, 95%), hsl(200, 18%, 17%))' }}>
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => scrollToSection('#')}>
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-rose-pink to-primary flex items-center justify-center">
                 <img src="/images/logo.png" alt="Logo" className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -52,11 +51,11 @@ export default function Footer() {
             <p className="text-muted-foreground mb-6">Premium dry fruits for a healthy lifestyle. From our family to yours.</p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin size={14} className="text-primary" />
+                <MapPin size={14} className="text-rose-pink" />
                 <span>Bengaluru Road, Krishna Nagar, Kurnool-518003</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Clock size={14} className="text-primary" />
+                <Clock size={14} className="text-rose-pink" />
                 <span>Open until 10:00 PM</span>
               </div>
             </div>
@@ -68,7 +67,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks[section].map((link) => (
                   <li key={link.name}>
-                    <button onClick={() => scrollToSection(link.href)} className="text-muted-foreground hover:text-primary transition-colors">
+                    <button onClick={() => scrollToSection(link.href)} className="text-muted-foreground hover:text-rose-pink transition-colors">
                       {link.name}
                     </button>
                   </li>
@@ -78,14 +77,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Welcome Dry Fruit House. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="text-sm text-muted-foreground">Follow us:</span>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Youtube size={20} /></a>
+              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Facebook size={20} /></a>
+              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Instagram size={20} /></a>
+              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Youtube size={20} /></a>
             </div>
           </div>
         </div>

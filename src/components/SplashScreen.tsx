@@ -23,67 +23,72 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
     <AnimatePresence>
       <motion.div
         className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, hsl(30, 30%, 95%) 0%, hsl(216, 26%, 85%) 50%, hsl(30, 33%, 90%) 100%)' }}
+        style={{ background: 'linear-gradient(135deg, hsl(30, 30%, 95%) 0%, hsl(335, 70%, 92%) 30%, hsl(216, 26%, 85%) 60%, hsl(30, 33%, 90%) 100%)' }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Animated background orbs */}
+        {/* Animated orbs */}
         <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full"
-          style={{ background: 'radial-gradient(circle, hsla(216, 26%, 55%, 0.15), transparent)' }}
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, hsla(335, 87%, 71%, 0.12), transparent)' }}
+          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3], x: [-50, 50, -50] }}
+          transition={{ duration: 4, repeat: Infinity }}
         />
         <motion.div
           className="absolute w-[400px] h-[400px] rounded-full"
-          style={{ background: 'radial-gradient(circle, hsla(30, 33%, 85%, 0.3), transparent)' }}
-          animate={{ scale: [1.2, 1, 1.2], x: [50, -50, 50], y: [-30, 30, -30] }}
-          transition={{ duration: 4, repeat: Infinity }}
+          style={{ background: 'radial-gradient(circle, hsla(216, 26%, 55%, 0.15), transparent)' }}
+          animate={{ scale: [1.2, 1, 1.2], x: [60, -60, 60], y: [-40, 40, -40] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute w-[300px] h-[300px] rounded-full"
+          style={{ background: 'radial-gradient(circle, hsla(30, 33%, 85%, 0.25), transparent)' }}
+          animate={{ scale: [0.8, 1.2, 0.8], y: [30, -50, 30] }}
+          transition={{ duration: 3.5, repeat: Infinity }}
         />
 
-        {/* Decorative floating elements - leaf/botanical shapes */}
+        {/* Decorative shapes */}
         {phase >= 1 && (
           <>
-            {[0, 1, 2, 3, 4, 5].map((i) => (
+            {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
               <motion.div
                 key={i}
-                className="absolute"
-                initial={{ opacity: 0, scale: 0, y: 100 }}
-                animate={{
-                  opacity: [0, 0.6, 0.6, 0],
-                  scale: [0, 1, 0.9, 0.7],
-                  y: [100, -20 + (i % 3) * 30, -40, -100],
-                  x: [(i - 2.5) * 80, (i - 2.5) * 110],
-                  rotate: [0, (i % 2 === 0 ? 1 : -1) * 20],
+                className="absolute rounded-full"
+                style={{
+                  width: 8 + (i % 3) * 6,
+                  height: 8 + (i % 3) * 6,
+                  background: i % 2 === 0
+                    ? 'hsl(335, 87%, 71%)'
+                    : i % 3 === 0 ? 'hsl(216, 26%, 55%)' : 'hsl(30, 33%, 75%)',
                 }}
-                transition={{ duration: 2.5, delay: i * 0.15, ease: 'easeOut' }}
-              >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="hsl(216, 26%, 55%)" strokeWidth="1.5" opacity={0.5}>
-                  {i % 3 === 0 && <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.5-3 2-7 2-10S13.5 2 12 2z" />}
-                  {i % 3 === 1 && <path d="M7 21c0-4 2-8 5-10s5-6 5-10c-3 2-5 5-7 8S7 17 7 21z" />}
-                  {i % 3 === 2 && <circle cx="12" cy="12" r="8" />}
-                </svg>
-              </motion.div>
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: [0, 0.7, 0.5, 0],
+                  scale: [0, 1.5, 1, 0.5],
+                  y: [80, -30 + (i % 4) * 20, -80, -150],
+                  x: [(i - 3.5) * 70, (i - 3.5) * 100],
+                }}
+                transition={{ duration: 2.5, delay: i * 0.1, ease: 'easeOut' }}
+              />
             ))}
           </>
         )}
 
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col items-center text-center">
+        <div className="relative z-10 flex flex-col items-center text-center px-6">
           {/* Person Image + Logo */}
           {phase >= 0 && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.5, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
               className="relative mb-8"
             >
-              {/* Person image circle */}
               <div
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden"
+                className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden"
                 style={{
-                  border: '4px solid hsl(216, 26%, 55%)',
-                  boxShadow: '0 0 60px hsla(216, 26%, 55%, 0.2), 0 0 100px hsla(30, 33%, 85%, 0.3)',
+                  border: '4px solid hsl(335, 87%, 71%)',
+                  boxShadow: '0 0 60px hsla(335, 87%, 71%, 0.25), 0 0 100px hsla(216, 26%, 55%, 0.15)',
                 }}
               >
                 <img
@@ -93,7 +98,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
-                    target.parentElement!.style.background = 'linear-gradient(135deg, hsl(216, 26%, 55%), hsl(30, 33%, 85%))';
+                    target.parentElement!.style.background = 'linear-gradient(135deg, hsl(335, 87%, 71%), hsl(216, 26%, 55%))';
                     target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg></div>';
                   }}
                 />
@@ -105,9 +110,9 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="absolute -bottom-3 -right-3 w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(216, 26%, 55%), hsl(30, 33%, 85%))',
+                  background: 'linear-gradient(135deg, hsl(335, 87%, 71%), hsl(216, 26%, 55%))',
                   border: '3px solid hsl(30, 30%, 97%)',
-                  boxShadow: '0 4px 20px hsla(216, 26%, 55%, 0.3)',
+                  boxShadow: '0 4px 20px hsla(335, 87%, 71%, 0.3)',
                 }}
               >
                 <img
@@ -131,7 +136,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-display font-bold mb-3"
               style={{
-                background: 'linear-gradient(135deg, hsl(216, 26%, 40%), hsl(216, 26%, 55%), hsl(30, 33%, 70%))',
+                background: 'linear-gradient(135deg, hsl(200, 18%, 17%), hsl(335, 87%, 71%), hsl(216, 26%, 55%))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -146,7 +151,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-xl md:text-2xl font-display tracking-widest uppercase"
-              style={{ color: 'hsl(216, 26%, 45%)' }}
+              style={{ color: 'hsl(200, 18%, 25%)' }}
             >
               Dry Fruit House
             </motion.p>
@@ -158,7 +163,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               animate={{ opacity: 0.7 }}
               transition={{ duration: 0.8 }}
               className="mt-4 text-sm tracking-[0.3em] uppercase"
-              style={{ color: 'hsl(220, 20%, 40%)' }}
+              style={{ color: 'hsl(335, 50%, 50%)' }}
             >
               Premium Quality · Since Day One
             </motion.p>
@@ -167,14 +172,14 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           {/* Loading bar */}
           {phase >= 1 && (
             <motion.div
-              className="mt-8 w-48 h-1 rounded-full overflow-hidden"
-              style={{ background: 'hsla(216, 26%, 55%, 0.15)' }}
+              className="mt-8 w-48 h-1.5 rounded-full overflow-hidden"
+              style={{ background: 'hsla(200, 18%, 17%, 0.08)' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, hsl(216, 26%, 55%), hsl(30, 33%, 85%))' }}
+                style={{ background: 'linear-gradient(90deg, hsl(335, 87%, 71%), hsl(216, 26%, 55%), hsl(30, 33%, 85%))' }}
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
                 transition={{ duration: 2.8, ease: 'easeInOut' }}
