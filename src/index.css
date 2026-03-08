@@ -4,101 +4,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Premium Dry Fruit House Design System - Only #8E44AD and #F7A1B5 */
+/* Welcome Dry Fruit House - Light & Colorful Design System */
+/* Brand Colors: #E9D9C9 (Warm Cream) & #6E86AB (Steel Blue) */
 
 @layer base {
   :root {
-    --background: 280 20% 6%;
-    --foreground: 340 30% 95%;
+    --background: 30 30% 97%;
+    --foreground: 220 20% 15%;
 
-    --card: 280 15% 10%;
-    --card-foreground: 340 30% 95%;
+    --card: 30 25% 95%;
+    --card-foreground: 220 20% 15%;
 
-    --popover: 280 15% 10%;
-    --popover-foreground: 340 30% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
 
-    --primary: 280 52% 49%;
+    --primary: 216 26% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 340 60% 84%;
-    --secondary-foreground: 280 20% 10%;
+    --secondary: 30 33% 85%;
+    --secondary-foreground: 220 20% 15%;
 
-    --muted: 280 10% 16%;
-    --muted-foreground: 280 15% 60%;
+    --muted: 30 15% 92%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 340 60% 84%;
-    --accent-foreground: 280 20% 10%;
+    --accent: 216 26% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 280 15% 20%;
-    --input: 280 15% 14%;
-    --ring: 280 52% 49%;
+    --border: 30 15% 85%;
+    --input: 30 15% 90%;
+    --ring: 216 26% 55%;
 
     --radius: 1rem;
 
-    /* Brand colors - only purple and pink */
-    --royal-purple: 280 52% 49%;
-    --blush-pink: 340 60% 84%;
-    --golden-almond: 45 85% 65%;
-    --cashew-cream: 40 50% 85%;
-    --pistachio-green: 140 45% 50%;
-    --walnut-brown: 25 40% 35%;
-    --date-amber: 30 80% 45%;
-    --raisin-deep: 340 35% 25%;
+    /* Brand tokens */
+    --warm-cream: 30 33% 85%;
+    --steel-blue: 216 26% 55%;
+    --golden-almond: 38 60% 65%;
+    --cashew-cream: 35 45% 82%;
+    --pistachio-green: 140 35% 50%;
+    --walnut-brown: 25 35% 40%;
+    --date-amber: 30 70% 50%;
+    --soft-rose: 10 40% 80%;
 
-    /* Gradients - only purple and pink */
-    --gradient-hero: linear-gradient(135deg, hsl(280, 52%, 49%) 0%, hsl(340, 60%, 84%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(280, 15%, 12%) 0%, hsl(280, 15%, 8%) 100%);
-    --gradient-glass: linear-gradient(135deg, hsla(0, 0%, 100%, 0.08) 0%, hsla(0, 0%, 100%, 0.03) 100%);
-    --gradient-golden: linear-gradient(135deg, hsl(280, 52%, 49%) 0%, hsl(340, 60%, 84%) 100%);
-    --gradient-purple-pink: linear-gradient(135deg, hsl(280, 52%, 49%) 0%, hsl(340, 60%, 84%) 100%);
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(216, 26%, 55%) 0%, hsl(30, 33%, 85%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(30, 25%, 96%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsla(0, 0%, 100%, 0.7) 0%, hsla(0, 0%, 100%, 0.4) 100%);
 
     /* Shadows */
-    --shadow-glow: 0 0 60px hsla(280, 52%, 49%, 0.3);
-    --shadow-card: 0 25px 50px -12px hsla(0, 0%, 0%, 0.5);
-    --shadow-product: 0 20px 40px -10px hsla(280, 52%, 49%, 0.2);
-    --shadow-float: 0 30px 60px -20px hsla(0, 0%, 0%, 0.4);
+    --shadow-glow: 0 0 60px hsla(216, 26%, 55%, 0.15);
+    --shadow-card: 0 10px 40px -12px hsla(220, 20%, 15%, 0.08);
+    --shadow-product: 0 20px 40px -10px hsla(216, 26%, 55%, 0.12);
+    --shadow-float: 0 20px 50px -15px hsla(220, 20%, 15%, 0.1);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 280 20% 6%;
-    --foreground: 340 30% 95%;
-    --card: 280 15% 10%;
-    --card-foreground: 340 30% 95%;
-    --popover: 280 15% 10%;
-    --popover-foreground: 340 30% 95%;
-    --primary: 280 52% 49%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 340 60% 84%;
-    --secondary-foreground: 280 20% 10%;
-    --muted: 280 10% 16%;
-    --muted-foreground: 280 15% 60%;
-    --accent: 340 60% 84%;
-    --accent-foreground: 280 20% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 280 15% 20%;
-    --input: 280 15% 14%;
-    --ring: 280 52% 49%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 216 26% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 30 25% 95%;
+    --sidebar-accent-foreground: 220 20% 15%;
+    --sidebar-border: 30 15% 85%;
+    --sidebar-ring: 216 26% 55%;
   }
 }
 
@@ -119,12 +88,14 @@
 
 @layer components {
   .glass-panel {
-    @apply backdrop-blur-xl border border-white/10 rounded-2xl;
-    background: var(--gradient-glass);
+    @apply backdrop-blur-xl rounded-2xl;
+    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.5) 100%);
+    border: 1px solid hsla(0, 0%, 100%, 0.6);
+    box-shadow: 0 8px 32px hsla(220, 20%, 15%, 0.06);
   }
 
-  .glow-purple {
-    box-shadow: var(--shadow-glow);
+  .glow-blue {
+    box-shadow: 0 0 40px hsla(216, 26%, 55%, 0.2);
   }
 
   .gradient-text {
@@ -155,11 +126,26 @@
     @apply relative overflow-hidden rounded-3xl transition-all duration-500;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
+    border: 1px solid hsla(30, 15%, 85%, 0.6);
   }
 
   .product-card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-8px) scale(1.01);
     box-shadow: var(--shadow-product);
+  }
+
+  .clay-card {
+    background: linear-gradient(145deg, hsl(30, 30%, 97%), hsl(30, 25%, 93%));
+    border-radius: 1.5rem;
+    box-shadow: 8px 8px 20px hsla(220, 15%, 70%, 0.15), -8px -8px 20px hsla(0, 0%, 100%, 0.8);
+    border: 1px solid hsla(0, 0%, 100%, 0.5);
+  }
+
+  .liquid-glass {
+    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.6), hsla(0, 0%, 100%, 0.3));
+    backdrop-filter: blur(30px) saturate(1.5);
+    border: 1px solid hsla(0, 0%, 100%, 0.5);
+    box-shadow: 0 8px 32px hsla(216, 26%, 55%, 0.08), inset 0 1px 0 hsla(0, 0%, 100%, 0.6);
   }
 
   .float-animation {
@@ -173,9 +159,9 @@
   .shimmer {
     background: linear-gradient(
       90deg,
-      hsla(0, 0%, 100%, 0) 0%,
-      hsla(0, 0%, 100%, 0.1) 50%,
-      hsla(0, 0%, 100%, 0) 100%
+      hsla(30, 33%, 85%, 0) 0%,
+      hsla(30, 33%, 85%, 0.4) 50%,
+      hsla(30, 33%, 85%, 0) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
@@ -190,7 +176,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
 }
 
 @keyframes pulseGlow {

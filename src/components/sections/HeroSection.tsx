@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Suspense } from 'react';
 import DryFruitScene from '../three/DryFruitScene';
 import { Button } from '../ui/button';
+import { ArrowDown } from 'lucide-react';
 
 const scrollToSection = (href: string) => {
   const el = document.querySelector(href);
@@ -11,12 +12,13 @@ const scrollToSection = (href: string) => {
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-muted to-background" />
+      {/* Light gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-secondary/30" />
       
-      {/* Animated Gradient Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/20 blur-3xl animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-secondary/30 blur-3xl animate-pulse-glow delay-1000" />
+      {/* Soft color orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-secondary/40 blur-3xl animate-pulse-glow" />
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-golden-almond/15 blur-3xl" />
       
       {/* 3D Scene */}
       <div className="absolute inset-0 z-0">
@@ -38,10 +40,10 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass-panel border border-primary/30"
+            className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full liquid-glass"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-muted-foreground">Premium Quality Since Day One</span>
+            <span className="text-sm text-muted-foreground font-medium">Premium Quality Since Day One</span>
           </motion.div>
 
           {/* Main Headline */}
@@ -76,7 +78,7 @@ export default function HeroSection() {
             <Button 
               size="lg" 
               onClick={() => scrollToSection('#products')}
-              className="text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity glow-purple"
+              className="text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-steel-blue text-primary-foreground hover:opacity-90 transition-opacity shadow-lg"
             >
               Explore Products
             </Button>
@@ -84,7 +86,7 @@ export default function HeroSection() {
               size="lg" 
               variant="outline"
               onClick={() => scrollToSection('#contact')}
-              className="text-lg px-8 py-6 rounded-full border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all"
+              className="text-lg px-8 py-6 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all"
             >
               Order Now
             </Button>
@@ -100,13 +102,12 @@ export default function HeroSection() {
         >
           <div className="flex flex-col items-center gap-2">
             <span className="text-sm text-muted-foreground">Scroll to explore</span>
-            <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-2 h-2 rounded-full bg-secondary"
-              />
-            </div>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ArrowDown size={20} className="text-primary" />
+            </motion.div>
           </div>
         </motion.div>
       </div>

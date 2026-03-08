@@ -61,15 +61,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Brand colors
-        "royal-purple": "hsl(var(--royal-purple))",
-        "blush-pink": "hsl(var(--blush-pink))",
+        "warm-cream": "hsl(var(--warm-cream))",
+        "steel-blue": "hsl(var(--steel-blue))",
         "golden-almond": "hsl(var(--golden-almond))",
         "cashew-cream": "hsl(var(--cashew-cream))",
         "pistachio-green": "hsl(var(--pistachio-green))",
         "walnut-brown": "hsl(var(--walnut-brown))",
         "date-amber": "hsl(var(--date-amber))",
-        "raisin-deep": "hsl(var(--raisin-deep))",
+        "soft-rose": "hsl(var(--soft-rose))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -89,7 +88,7 @@ export default {
         },
         "float": {
           "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "50%": { transform: "translateY(-20px) rotate(5deg)" },
+          "50%": { transform: "translateY(-20px) rotate(3deg)" },
         },
         "spin-slow": {
           from: { transform: "rotate(0deg)" },

@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import productsData from '../../data/products.json';
 import ProductCard from '../ui/ProductCard';
@@ -11,18 +10,16 @@ export default function ProductsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
+  const filteredProducts = activeCategory === 'all'
+    ? products
     : products.filter(p => p.category === activeCategory);
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-accent/5 blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="container mx-auto px-6">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -30,16 +27,15 @@ export default function ProductsSection() {
           className="text-center mb-16"
         >
           <span className="text-primary font-medium mb-4 block">Our Collection</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Premium <span className="gradient-text">Dry Fruits</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Handpicked from the finest orchards, each product is a promise of quality, 
+            Handpicked from the finest orchards, each product is a promise of quality,
             freshness, and natural goodness.
           </p>
         </motion.div>
 
-        {/* Category Filter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -50,8 +46,8 @@ export default function ProductsSection() {
             onClick={() => setActiveCategory('all')}
             className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
               activeCategory === 'all'
-                ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground'
-                : 'glass-panel hover:bg-muted/50'
+                ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                : 'clay-card hover:shadow-lg'
             }`}
           >
             All Products
@@ -60,19 +56,17 @@ export default function ProductsSection() {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground'
-                  : 'glass-panel hover:bg-muted/50'
+                  ? 'bg-gradient-to-r from-primary to-steel-blue text-primary-foreground shadow-md'
+                  : 'clay-card hover:shadow-lg'
               }`}
             >
-              <span>{category.icon}</span>
-              <span>{category.name}</span>
+              {category.name}
             </button>
           ))}
         </motion.div>
 
-        {/* Products Grid */}
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
