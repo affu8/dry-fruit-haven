@@ -26,9 +26,9 @@ export default function OwnerStorySection() {
 
               <div className="absolute inset-4 rounded-2xl bg-muted overflow-hidden">
                 <img
-                  src="/images/owner-profile.jpg"
+                  src="/images/owner-profile-3.jpg"
                   alt="Founder, Welcome Dry Fruit House"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';

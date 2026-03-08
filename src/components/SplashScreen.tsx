@@ -92,7 +92,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                 }}
               >
                 <img
-                  src="/images/owner-profile.jpg"
+                  src="/images/owner-profile-3.jpg"
                   alt="Welcome Dry Fruit House - Founder"
                   className="w-full h-full object-cover"
                   onError={(e) => {
