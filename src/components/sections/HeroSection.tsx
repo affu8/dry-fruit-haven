@@ -23,8 +23,8 @@ export default function HeroSection() {
       <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-golden-almond/15 blur-3xl" />
       <div className="absolute bottom-1/3 left-1/3 w-48 h-48 rounded-full bg-secondary/30 blur-3xl" />
       
-      {/* 3D Scene */}
-      <div className="absolute inset-0 z-0">
+      {/* 3D Scene - pushed behind content */}
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <Suspense fallback={null}>
           <DryFruitScene />
         </Suspense>
