@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from './button';
+import { ShoppingBag, ImageIcon } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -11,31 +12,25 @@ interface Product {
   featured?: boolean;
 }
 
-interface ProductCardProps {
-  product: Product;
-}
-
 const scrollToContact = () => {
   const el = document.querySelector('#contact');
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <motion.div
-      whileHover={{ y: -10, scale: 1.02 }}
+      whileHover={{ y: -8, scale: 1.01 }}
       transition={{ duration: 0.3 }}
       className="product-card group"
     >
-      {/* Featured Badge */}
       {product.featured && (
-        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-medium text-primary-foreground">
+        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-steel-blue text-xs font-medium text-primary-foreground shadow-sm">
           Featured
         </div>
       )}
 
-      {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-muted">
+      <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-secondary/30">
         <img
           src={`/images/products/${product.image}`}
           alt={product.name}
@@ -47,12 +42,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             if (parent) {
               const fallback = document.createElement('div');
               fallback.className = 'absolute inset-0 flex items-center justify-center';
-              const icons: Record<string, string> = {
-                almonds: '🌰', cashews: '🥜', pistachios: '🫛', walnuts: '🧠',
-                dates: '🌴', raisins: '🍇', mixed: '🎁', 'gift-hampers': '🎀'
-              };
               fallback.innerHTML = `<div class="text-center p-6">
-                <div class="text-5xl mb-2">${icons[product.category] || '🌰'}</div>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(216, 26%, 55%)" stroke-width="1.5" class="mx-auto mb-2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                 <p class="text-xs text-muted-foreground">${product.image}</p>
               </div>`;
               parent.appendChild(fallback);
@@ -60,32 +51,27 @@ export default function ProductCard({ product }: ProductCardProps) {
           }}
         />
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
             size="sm"
             onClick={scrollToContact}
-            className="rounded-full bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground"
+            className="rounded-full bg-background text-foreground hover:bg-primary hover:text-primary-foreground shadow-md"
           >
+            <ShoppingBag size={16} className="mr-1" />
             Quick Order
           </Button>
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-6">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-display font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
-            {product.name}
-          </h3>
-        </div>
-
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+        <h3 className="font-display font-semibold text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
+          {product.name}
+        </h3>
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-2 mt-2">
           {product.description}
         </p>
-
         <div className="flex items-center justify-between">
-          <span className="text-xl font-display font-bold text-secondary">
+          <span className="text-xl font-display font-bold text-primary">
             {product.price}
           </span>
           <Button
