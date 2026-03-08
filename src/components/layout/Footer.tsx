@@ -30,7 +30,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="py-20 border-t border-border" style={{ background: 'linear-gradient(180deg, hsl(30, 25%, 95%), hsl(200, 18%, 17%))' }}>
+    <footer className="py-20 border-t border-border bg-dark-slate text-primary-foreground">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div>
@@ -44,17 +44,17 @@ export default function Footer() {
                   }} />
               </div>
               <div>
-                <div className="font-display font-bold text-xl text-foreground">Welcome</div>
-                <div className="text-sm text-muted-foreground">Dry Fruit House</div>
+                <div className="font-display font-bold text-xl text-primary-foreground">Welcome</div>
+                <div className="text-sm text-primary-foreground/60">Dry Fruit House</div>
               </div>
             </div>
-            <p className="text-muted-foreground mb-6">Premium dry fruits for a healthy lifestyle. From our family to yours.</p>
+            <p className="text-primary-foreground/70 mb-6">Premium dry fruits for a healthy lifestyle. From our family to yours.</p>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="flex items-center gap-2 text-primary-foreground/70">
                 <MapPin size={14} className="text-rose-pink" />
                 <span>Bengaluru Road, Krishna Nagar, Kurnool-518003</span>
               </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="flex items-center gap-2 text-primary-foreground/70">
                 <Clock size={14} className="text-rose-pink" />
                 <span>Open until 10:00 PM</span>
               </div>
@@ -63,11 +63,11 @@ export default function Footer() {
 
           {(['products', 'company', 'support'] as const).map((section) => (
             <div key={section}>
-              <h3 className="font-display font-semibold text-lg mb-6 capitalize text-foreground">{section}</h3>
+              <h3 className="font-display font-semibold text-lg mb-6 capitalize text-primary-foreground">{section}</h3>
               <ul className="space-y-3">
                 {footerLinks[section].map((link) => (
                   <li key={link.name}>
-                    <button onClick={() => scrollToSection(link.href)} className="text-muted-foreground hover:text-rose-pink transition-colors">
+                    <button onClick={() => scrollToSection(link.href)} className="text-primary-foreground/60 hover:text-rose-pink transition-colors">
                       {link.name}
                     </button>
                   </li>
@@ -77,14 +77,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Welcome Dry Fruit House. All rights reserved.</p>
+        <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-primary-foreground/50">&copy; {new Date().getFullYear()} Welcome Dry Fruit House. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="text-sm text-muted-foreground">Follow us:</span>
+            <span className="text-sm text-primary-foreground/50">Follow us:</span>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="text-muted-foreground hover:text-rose-pink transition-colors"><Youtube size={20} /></a>
+              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Facebook size={20} /></a>
+              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Instagram size={20} /></a>
+              <a href="#" className="text-primary-foreground/50 hover:text-rose-pink transition-colors"><Youtube size={20} /></a>
             </div>
           </div>
         </div>
