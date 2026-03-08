@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from './button';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, ImageIcon } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -25,7 +25,7 @@ export default function ProductCard({ product }: { product: Product }) {
       className="product-card group"
     >
       {product.featured && (
-        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-accent to-primary text-xs font-medium text-accent-foreground shadow-sm">
+        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-steel-blue text-xs font-medium text-primary-foreground shadow-sm">
           Featured
         </div>
       )}
@@ -43,7 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
               const fallback = document.createElement('div');
               fallback.className = 'absolute inset-0 flex items-center justify-center';
               fallback.innerHTML = `<div class="text-center p-6">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(338, 87%, 71%)" stroke-width="1.5" class="mx-auto mb-2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(216, 26%, 55%)" stroke-width="1.5" class="mx-auto mb-2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                 <p class="text-xs text-muted-foreground">${product.image}</p>
               </div>`;
               parent.appendChild(fallback);
@@ -51,11 +51,11 @@ export default function ProductCard({ product }: { product: Product }) {
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-accent/60 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button
             size="sm"
             onClick={scrollToContact}
-            className="rounded-full bg-background text-foreground hover:bg-accent hover:text-accent-foreground shadow-md"
+            className="rounded-full bg-background text-foreground hover:bg-primary hover:text-primary-foreground shadow-md"
           >
             <ShoppingBag size={16} className="mr-1" />
             Quick Order
@@ -64,21 +64,21 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="p-6">
-        <h3 className="font-display font-semibold text-lg leading-tight group-hover:text-accent transition-colors text-foreground">
+        <h3 className="font-display font-semibold text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
           {product.name}
         </h3>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 mt-2">
           {product.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-xl font-display font-bold text-accent">
+          <span className="text-xl font-display font-bold text-primary">
             {product.price}
           </span>
           <Button
             variant="outline"
             size="sm"
             onClick={scrollToContact}
-            className="rounded-full border-accent/30 hover:bg-accent hover:text-accent-foreground"
+            className="rounded-full border-primary/30 hover:bg-primary hover:text-primary-foreground"
           >
             Order Now
           </Button>

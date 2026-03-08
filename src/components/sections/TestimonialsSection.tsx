@@ -14,8 +14,8 @@ export default function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="py-32 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(30, 25%, 95%), hsl(338, 30%, 95%))' }}>
-      <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-accent/10 blur-3xl -translate-y-1/2" />
+    <section ref={ref} className="py-32 relative overflow-hidden bg-card">
+      <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-secondary/15 blur-3xl -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="container mx-auto px-6">
@@ -25,7 +25,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-accent font-medium mb-4 block">What People Say</span>
+          <span className="text-primary font-medium mb-4 block">What People Say</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Customer <span className="gradient-text">Love</span>
           </h2>
@@ -38,10 +38,10 @@ export default function TestimonialsSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 * index }}
-              className={`${index % 2 === 0 ? 'clay-card' : 'clay-card-rose'} p-8 relative`}
+              className="clay-card p-8 relative"
             >
               <div className="absolute top-6 right-6">
-                <Quote size={28} className="text-accent/20" />
+                <Quote size={28} className="text-primary/15" />
               </div>
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_, i) => (
@@ -50,8 +50,8 @@ export default function TestimonialsSection() {
               </div>
               <p className="text-lg text-foreground mb-6 italic leading-relaxed">"{t.quote}"</p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
-                  <User size={20} className="text-accent" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/15 to-secondary/30 flex items-center justify-center">
+                  <User size={20} className="text-primary" />
                 </div>
                 <div>
                   <div className="font-display font-semibold text-foreground">{t.name}</div>
