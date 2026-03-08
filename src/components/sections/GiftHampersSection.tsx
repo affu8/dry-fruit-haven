@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '../ui/button';
-import { Gift, ImageIcon } from 'lucide-react';
+import { Gift } from 'lucide-react';
 
 const scrollToContact = () => {
   const el = document.querySelector('#contact');
@@ -11,19 +11,19 @@ const scrollToContact = () => {
 const hampers = [
   {
     name: 'Royal Collection',
-    price: '\u20B92,500',
+    price: '₹2,500',
     items: ['Premium Almonds', 'Iranian Pistachios', 'Medjool Dates', 'Chile Walnuts'],
     image: 'royal-collection-hamper.jpg'
   },
   {
     name: 'Festive Celebration',
-    price: '\u20B91,800',
+    price: '₹1,800',
     items: ['Mixed Dry Fruits', 'Cashews', 'Raisins', 'Premium Dates'],
     image: 'festive-celebration-hamper.jpg'
   },
   {
     name: 'Corporate Elite',
-    price: '\u20B93,500',
+    price: '₹3,500',
     items: ['California Almonds', 'W240 Cashews', 'Premium Pistachios', 'Trail Mix', 'Dates'],
     image: 'corporate-elite-hamper.jpg'
   }
@@ -66,29 +66,24 @@ export default function GiftHampersSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-rose-pink/10 via-primary/10 to-secondary/15 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
               <div className="relative clay-card overflow-hidden">
-                <div className="aspect-square bg-secondary/20 flex items-center justify-center overflow-hidden">
+                <div className="aspect-[4/3] bg-secondary/20 overflow-hidden">
                   <img
                     src={`/images/hampers/${hamper.image}`}
                     alt={hamper.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.parentElement!.innerHTML = `<div class="text-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="hsl(335, 87%, 71%)" stroke-width="1.5" class="mx-auto mb-2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V5a2 2 0 00-4 0v3"/><path d="M16 8V5a2 2 0 00-4 0"/><path d="M12 8v13"/><path d="M3 14h18"/></svg><p class="text-sm" style="color: hsl(200, 10%, 45%)">${hamper.image}</p></div>`;
-                    }}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
 
-                <div className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl font-display font-bold text-foreground">{hamper.name}</h3>
-                    <span className="text-2xl font-display font-bold text-rose-pink">{hamper.price}</span>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-display font-bold text-foreground">{hamper.name}</h3>
+                    <span className="text-xl font-display font-bold text-rose-pink">{hamper.price}</span>
                   </div>
 
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-1.5 mb-5">
                     {hamper.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-pink" />
+                      <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-pink flex-shrink-0" />
                         {item}
                       </li>
                     ))}
