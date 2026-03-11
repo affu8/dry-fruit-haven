@@ -55,7 +55,7 @@ export default function Navbar() {
               <img
                 src="/images/logo.png"
                 alt="Welcome Dry Fruit House"
-                className="w-full h-full object-contain p-0.5"
+                className="w-full h-full object-cover"
               />
             </div>
             <div>

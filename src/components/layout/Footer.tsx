@@ -39,7 +39,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => scrollToSection('#')}>
               <div className="w-12 h-12 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center">
-                <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain p-0.5" />
+                <img src="/images/logo.png" alt="Logo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="font-display font-bold text-xl" style={{ color: 'hsl(200, 18%, 17%)' }}>Welcome</div>
