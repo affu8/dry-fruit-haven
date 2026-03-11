@@ -45,17 +45,30 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const productsSummary = selectedProducts.map(p => `${p.name} (${p.quantity}) - ${p.price}`).join(', ');
+      const productNames = selectedProducts.map(p => p.name).join(', ');
+      const productQuantities = selectedProducts.map(p => p.quantity).join(', ');
+      const productPrices = selectedProducts.map(p => p.price).join(', ');
       if (GOOGLE_SHEETS_URL.length > 0) {
         await fetch(GOOGLE_SHEETS_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            ...formData,
-            products: productsSummary,
-            productCount: selectedProducts.length,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            pincode: formData.pincode,
+            product: productNames,
+            quantity: productQuantities,
+            prices: productPrices,
+            occasion: formData.occasion,
+            deliveryDate: formData.deliveryDate,
+            message: formData.message,
+            productCount: selectedProducts.length
           }),
         });
       }

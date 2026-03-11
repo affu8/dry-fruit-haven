@@ -64,23 +64,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                   className="w-full h-full object-cover object-top"
                 />
               </div>
-              {/* Logo badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="absolute -bottom-2 -right-2 w-14 h-14 rounded-full overflow-hidden"
-                style={{
-                  border: '3px solid hsl(30, 30%, 97%)',
-                  boxShadow: '0 4px 15px hsla(335, 87%, 71%, 0.25)',
-                }}
-              >
-                <img
-                  src="/images/logo.png"
-                  alt="Logo"
-                  className="w-full h-full object-contain bg-white p-1"
-                />
-              </motion.div>
             </motion.div>
           )}
 
