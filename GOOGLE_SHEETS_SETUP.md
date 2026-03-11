@@ -49,9 +49,11 @@ function doPost(e) {
       data.pincode || '',
       data.product || '',
       data.quantity || '',
+      data.prices || '',
       data.occasion || '',
       data.deliveryDate || '',
-      data.message || ''
+      data.message || '',
+      data.productCount || ''
     ]);
     
     return ContentService
