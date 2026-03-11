@@ -11,9 +11,9 @@ This guide will help you connect the website enquiry form to Google Sheets so ev
 3. Name it: **Welcome Dry Fruit House - Enquiries** (click on "Untitled spreadsheet" at the top to rename)
 4. In **Row 1**, type these headers in each column:
 
-| Column A | Column B | Column C | Column D | Column E | Column F | Column G | Column H | Column I | Column J | Column K | Column L | Column M |
-|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|
-| Timestamp | Name | Phone | Email | Address | City | State | Pincode | Product | Quantity | Occasion | Delivery Date | Message |
+| Column A | Column B | Column C | Column D | Column E | Column F | Column G | Column H | Column I | Column J | Column K | Column L | Column M | Column N | Column O |
+|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|
+| Timestamp | Name | Phone | Email | Address | City | State | Pincode | Product | Quantity | Prices | Occasion | Delivery Date | Message | Product Count |
 
 5. You can make Row 1 **bold** for better visibility
 
