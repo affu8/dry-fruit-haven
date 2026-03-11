@@ -4,8 +4,16 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { MapPin, Clock, Package, Phone, Send, CheckCircle, Loader2, User, Mail, Calendar, MessageSquare, ShoppingBag, Home, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
+import ProductSelector from './ProductSelector';
 
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwc0adckJBBmNqyThgIitMWukDRPUbqWCwHmJXqLmdQfPV_dbpVAktkiLgHTaBzW6N3/exec';
+
+interface SelectedProduct {
+  id: string;
+  name: string;
+  price: string;
+  quantity: string;
+}
 
 interface FormData {
   name: string;
@@ -15,8 +23,6 @@ interface FormData {
   city: string;
   state: string;
   pincode: string;
-  product: string;
-  quantity: string;
   occasion: string;
   deliveryDate: string;
   message: string;
@@ -28,27 +34,34 @@ export default function ContactSection() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>([]);
   const [formData, setFormData] = useState<FormData>({
     name: '', phone: '', email: '',
     address: '', city: '', state: '', pincode: '',
-    product: '', quantity: '', occasion: '',
-    deliveryDate: '', message: ''
+    occasion: '', deliveryDate: '', message: ''
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      const productsSummary = selectedProducts.map(p => `${p.name} (${p.quantity}) - ${p.price}`).join(', ');
       if (GOOGLE_SHEETS_URL.length > 0) {
         await fetch(GOOGLE_SHEETS_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...formData, timestamp: new Date().toISOString() }),
+          body: JSON.stringify({
+            ...formData,
+            products: productsSummary,
+            productCount: selectedProducts.length,
+            timestamp: new Date().toISOString()
+          }),
         });
       }
       setSubmitted(true);
-      setFormData({ name: '', phone: '', email: '', address: '', city: '', state: '', pincode: '', product: '', quantity: '', occasion: '', deliveryDate: '', message: '' });
+      setFormData({ name: '', phone: '', email: '', address: '', city: '', state: '', pincode: '', occasion: '', deliveryDate: '', message: '' });
+      setSelectedProducts([]);
       setStep(1);
     } catch {
       alert('Something went wrong. Please try again or call us directly.');
@@ -74,13 +87,12 @@ export default function ContactSection() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-soft-rose/10 via-background to-primary/5" />
       <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-rose-pink/5 blur-3xl" />
       <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-secondary/15 blur-3xl" />
 
-      <div className="container mx-auto px-6 relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div className="container mx-auto px-4 sm:px-6 relative">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -88,29 +100,29 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-rose-pink font-medium mb-4 block">Get in Touch</span>
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
               Order Your <span className="gradient-text">Premium Pack</span>
             </h2>
-            <p className="text-lg text-muted-foreground mb-10">
+            <p className="text-base sm:text-lg text-muted-foreground mb-10">
               Whether you need dry fruits for daily snacking, festive celebrations,
               or bulk corporate orders — we deliver the finest quality to your doorstep.
             </p>
 
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               {contactInfo.map((item, i) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 * i }}
-                  className="flex items-center gap-4 p-4 rounded-2xl clay-card transition-all hover:shadow-lg"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl clay-card transition-all hover:shadow-lg"
                 >
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-rose-pink/15 to-primary/15">
-                    <item.icon size={22} className="text-rose-pink" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-rose-pink/15 to-primary/15">
+                    <item.icon size={20} className="text-rose-pink" />
                   </div>
                   <div>
-                    <div className="font-semibold text-foreground">{item.title}</div>
-                    <div className="text-muted-foreground text-sm whitespace-pre-line">{item.desc}</div>
+                    <div className="font-semibold text-foreground text-sm sm:text-base">{item.title}</div>
+                    <div className="text-muted-foreground text-xs sm:text-sm whitespace-pre-line">{item.desc}</div>
                   </div>
                 </motion.div>
               ))}
@@ -127,12 +139,12 @@ export default function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-12 rounded-3xl text-center clay-card"
+                className="p-8 sm:p-12 rounded-3xl text-center clay-card"
               >
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-rose-pink/20 to-primary/15 flex items-center justify-center mx-auto mb-6">
                   <CheckCircle size={40} className="text-rose-pink" />
                 </div>
-                <h3 className="text-3xl font-display font-bold mb-3 gradient-text">Thank You!</h3>
+                <h3 className="text-2xl sm:text-3xl font-display font-bold mb-3 gradient-text">Thank You!</h3>
                 <p className="text-muted-foreground mb-6">
                   Your enquiry has been received. We will contact you shortly with the best deals!
                 </p>
@@ -146,7 +158,7 @@ export default function ContactSection() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="p-8 md:p-10 rounded-3xl space-y-5"
+                className="p-5 sm:p-8 md:p-10 rounded-3xl space-y-4 sm:space-y-5"
                 style={{
                   background: 'linear-gradient(145deg, hsl(30, 30%, 98%), hsl(30, 25%, 95%))',
                   boxShadow: '12px 12px 24px hsla(200, 15%, 70%, 0.12), -12px -12px 24px hsla(0, 0%, 100%, 0.9)',
@@ -159,7 +171,7 @@ export default function ContactSection() {
                     <Send size={18} className="text-primary-foreground" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-foreground">Quick Enquiry</h3>
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground">Quick Enquiry</h3>
                     <p className="text-xs text-muted-foreground">Step {step} of 2</p>
                   </div>
                 </div>
@@ -174,7 +186,7 @@ export default function ContactSection() {
                   <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
                     <p className="text-sm text-muted-foreground mb-2">Tell us about yourself so we can serve you better.</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
                           <User size={14} className="text-rose-pink" /> Full Name <span className="text-destructive">*</span>
@@ -203,7 +215,7 @@ export default function ContactSection() {
                       <Input name="address" placeholder="House/Flat No, Street, Landmark" value={formData.address} onChange={handleChange} className={inputClass} />
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
                       <div>
                         <label className="text-xs font-medium mb-1 block text-foreground">City</label>
                         <Input name="city" placeholder="City" value={formData.city} onChange={handleChange} className={inputClass} />
@@ -233,37 +245,17 @@ export default function ContactSection() {
 
                 {step === 2 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-                    <p className="text-sm text-muted-foreground mb-2">Almost done! Tell us what you would like to order.</p>
+                    <p className="text-sm text-muted-foreground mb-2">Almost done! Select the products you'd like to order.</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
-                          <ShoppingBag size={14} className="text-rose-pink" /> Product
-                        </label>
-                        <select name="product" value={formData.product} onChange={handleChange}
-                          className="w-full h-10 px-3 rounded-xl bg-background/80 border border-border text-foreground text-sm focus:border-rose-pink/50 focus:outline-none transition-colors shadow-inner"
-                        >
-                          <option value="">Select product</option>
-                          <option value="almonds">Almonds</option>
-                          <option value="cashews">Cashews</option>
-                          <option value="pistachios">Pistachios</option>
-                          <option value="walnuts">Walnuts</option>
-                          <option value="dates">Dates</option>
-                          <option value="raisins">Raisins</option>
-                          <option value="mixed">Mixed Dry Fruits</option>
-                          <option value="gift-hamper">Gift Hamper</option>
-                          <option value="bulk">Bulk Order</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
-                          <Package size={14} className="text-rose-pink" /> Quantity
-                        </label>
-                        <Input name="quantity" placeholder="e.g., 5 kg" value={formData.quantity} onChange={handleChange} className={inputClass} />
-                      </div>
+                    {/* Multi-select Product Picker */}
+                    <div>
+                      <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
+                        <ShoppingBag size={14} className="text-rose-pink" /> Products
+                      </label>
+                      <ProductSelector selectedProducts={selectedProducts} onChange={setSelectedProducts} />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
                           <Sparkles size={14} className="text-rose-pink" /> Occasion
