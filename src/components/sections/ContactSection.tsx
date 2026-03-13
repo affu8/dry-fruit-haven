@@ -91,7 +91,7 @@ export default function ContactSection() {
     { icon: MapPin, title: 'Visit Our Store', desc: 'Bengaluru Road, Krishna Nagar,\nKurnool-518003, Andhra Pradesh' },
     { icon: Clock, title: 'Store Hours', desc: 'Open Daily until 10:00 PM' },
     { icon: Package, title: 'Bulk Orders Welcome', desc: 'Special rates for wholesale & events' },
-    { icon: Phone, title: 'Quick Contact', desc: 'Call or WhatsApp us anytime' },
+    { icon: Phone, title: 'Quick Contact', desc: 'Call or WhatsApp: +91 9886223323' },
   ];
 
   const inputClass = "bg-background/80 border-border rounded-xl focus:border-rose-pink/50 shadow-inner text-foreground text-base h-12";
