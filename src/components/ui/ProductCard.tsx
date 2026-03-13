@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from './button';
-import { ShoppingBag, ImageIcon } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 
 interface Product {
   id: string;
