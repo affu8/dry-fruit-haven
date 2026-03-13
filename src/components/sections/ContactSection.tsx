@@ -3,8 +3,9 @@ import { useRef, useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
-import { MapPin, Clock, Package, Phone, Send, CheckCircle, Loader2, User, Mail, Calendar, MessageSquare, ShoppingBag, Home, ChevronRight, ChevronLeft, Sparkles, Gift } from 'lucide-react';
+import { MapPin, Clock, Package, Phone, Send, CheckCircle, Loader2, User, Mail, Calendar, MessageSquare, ShoppingBag, Home, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
 import ProductSelector, { type SelectedProduct } from './ProductSelector';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwc0adckJBBmNqyThgIitMWukDRPUbqWCwHmJXqLmdQfPV_dbpVAktkiLgHTaBzW6N3/exec';
 
@@ -24,6 +25,7 @@ interface FormData {
 export default function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isMobile = useIsMobile();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -89,7 +91,7 @@ export default function ContactSection() {
     { icon: MapPin, title: 'Visit Our Store', desc: 'Bengaluru Road, Krishna Nagar,\nKurnool-518003, Andhra Pradesh' },
     { icon: Clock, title: 'Store Hours', desc: 'Open Daily until 10:00 PM' },
     { icon: Package, title: 'Bulk Orders Welcome', desc: 'Special rates for wholesale & events' },
-    { icon: Phone, title: 'Quick Contact', desc: 'Call or WhatsApp us anytime' },
+    { icon: Phone, title: 'Quick Contact', desc: 'Call or WhatsApp: +91 9886223323' },
   ];
 
   const inputClass = "bg-background/80 border-border rounded-xl focus:border-rose-pink/50 shadow-inner text-foreground text-base h-12";
@@ -266,34 +268,48 @@ export default function ContactSection() {
                 {/* Step 2: Product Selection */}
                 {step === 2 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-                    <p className="text-sm text-muted-foreground">Select from our catalog or create a custom hamper.</p>
+                    <p className="text-sm text-muted-foreground">Select products or create a custom hamper, then continue.</p>
+
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
+                      {selectedProducts.length > 0
+                        ? `${selectedProducts.length} item${selectedProducts.length > 1 ? 's' : ''} selected`
+                        : 'Select at least one product to continue to final step.'}
+                    </div>
 
                     <div>
                       <label className="text-sm font-medium mb-1.5 flex items-center gap-1.5 text-foreground">
                         <ShoppingBag size={14} className="text-rose-pink" /> Products & Hampers
                       </label>
-                      <ProductSelector selectedProducts={selectedProducts} onChange={setSelectedProducts} />
+                      <ProductSelector
+                        selectedProducts={selectedProducts}
+                        onChange={setSelectedProducts}
+                        onDone={() => {
+                          if (isMobile && selectedProducts.length > 0) setStep(3);
+                        }}
+                      />
                     </div>
 
-                    <div className="flex gap-2 pt-2">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setStep(1)}
-                        className="rounded-full border-border hover:bg-secondary h-12 px-5"
-                      >
-                        <ChevronLeft size={18} /> Back
-                      </Button>
-                      <Button
-                        type="button"
-                        disabled={!canGoStep3}
-                        onClick={() => setStep(3)}
-                        className="flex-1 h-12 rounded-full bg-gradient-to-r from-rose-pink to-primary hover:opacity-90 text-primary-foreground shadow-lg disabled:opacity-40 text-base"
-                      >
-                        <span className="flex items-center gap-2">
-                          Continue <ChevronRight size={18} />
-                        </span>
-                      </Button>
+                    <div className="sticky bottom-0 -mx-1 px-1 pt-2 pb-1 bg-gradient-to-t from-background via-background/95 to-transparent">
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setStep(1)}
+                          className="rounded-full border-border hover:bg-secondary h-12 px-5"
+                        >
+                          <ChevronLeft size={18} /> Back
+                        </Button>
+                        <Button
+                          type="button"
+                          disabled={!canGoStep3}
+                          onClick={() => setStep(3)}
+                          className="flex-1 h-12 rounded-full bg-gradient-to-r from-rose-pink to-primary hover:opacity-90 text-primary-foreground shadow-lg disabled:opacity-40 text-base"
+                        >
+                          <span className="flex items-center gap-2">
+                            Continue ({selectedProducts.length}) <ChevronRight size={18} />
+                          </span>
+                        </Button>
+                      </div>
                     </div>
                   </motion.div>
                 )}

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronDown, ChevronUp, X, Package, Gift, Plus, Minus } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, X, Package, Gift, Plus, Search } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import productData from '@/data/products.json';
 
 export interface SelectedProduct {
@@ -14,79 +15,160 @@ export interface SelectedProduct {
 interface ProductSelectorProps {
   selectedProducts: SelectedProduct[];
   onChange: (products: SelectedProduct[]) => void;
+  onDone?: () => void;
 }
 
-export default function ProductSelector({ selectedProducts, onChange }: ProductSelectorProps) {
+export default function ProductSelector({ selectedProducts, onChange, onDone }: ProductSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showCustomHamper, setShowCustomHamper] = useState(false);
   const [customItemName, setCustomItemName] = useState('');
   const [customItemQty, setCustomItemQty] = useState('1 kg');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showAllSelected, setShowAllSelected] = useState(false);
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isMobile]);
 
-  const isSelected = (productId: string) => selectedProducts.some(p => p.id === productId);
+  useEffect(() => {
+    if (!isMobile || !isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobile, isOpen]);
+
+  const isSelected = (productId: string) => selectedProducts.some((p) => p.id === productId);
 
   const toggleProduct = (product: typeof productData.products[0]) => {
     if (isSelected(product.id)) {
-      onChange(selectedProducts.filter(p => p.id !== product.id));
-    } else {
-      onChange([...selectedProducts, { id: product.id, name: product.name, price: product.price, quantity: '1 kg' }]);
+      onChange(selectedProducts.filter((p) => p.id !== product.id));
+      return;
     }
+
+    onChange([
+      ...selectedProducts,
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: '1 kg'
+      }
+    ]);
   };
 
   const updateQuantity = (productId: string, quantity: string) => {
-    onChange(selectedProducts.map(p => p.id === productId ? { ...p, quantity } : p));
+    onChange(selectedProducts.map((p) => (p.id === productId ? { ...p, quantity } : p)));
   };
 
   const removeProduct = (productId: string) => {
-    onChange(selectedProducts.filter(p => p.id !== productId));
+    onChange(selectedProducts.filter((p) => p.id !== productId));
   };
 
   const addCustomItem = () => {
     if (!customItemName.trim()) return;
+
     const customId = `custom-${Date.now()}`;
-    onChange([...selectedProducts, { id: customId, name: customItemName, price: 'Custom', quantity: customItemQty, isCustomItem: true }]);
+    onChange([
+      ...selectedProducts,
+      {
+        id: customId,
+        name: customItemName,
+        price: 'Custom',
+        quantity: customItemQty,
+        isCustomItem: true
+      }
+    ]);
+
     setCustomItemName('');
     setCustomItemQty('1 kg');
   };
 
+  const search = searchTerm.trim().toLowerCase();
+  const filteredProducts = search
+    ? productData.products.filter((p) =>
+        p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search)
+      )
+    : productData.products;
+
   const getProductsByCategory = (categoryId: string) =>
-    productData.products.filter(p => p.category === categoryId);
+    filteredProducts.filter((p) => p.category === categoryId);
+
+  const visibleCategories = productData.categories.filter((cat) =>
+    getProductsByCategory(cat.id).length > 0
+  );
+
+  const categoriesToRender = activeCategory
+    ? productData.categories.filter((c) => c.id === activeCategory)
+    : visibleCategories;
 
   const totalItems = selectedProducts.length;
+  const customItems = selectedProducts.filter((p) => p.isCustomItem);
+  const selectedToRender = isMobile && !showAllSelected ? selectedProducts.slice(0, 3) : selectedProducts;
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+
+    if (isMobile && totalItems > 0) {
+      onDone?.();
+    }
+  };
 
   return (
     <div ref={containerRef} className="relative">
-      {/* Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-2 h-auto min-h-[3rem] px-4 py-2.5 rounded-2xl bg-background/80 border border-border text-sm focus:border-rose-pink/50 focus:outline-none transition-all shadow-inner text-left active:scale-[0.99]"
+        className="w-full flex items-center justify-between gap-2 h-auto min-h-[3.25rem] px-4 py-2.5 rounded-2xl bg-background/80 border border-border text-sm focus:border-rose-pink/50 focus:outline-none transition-all shadow-inner text-left active:scale-[0.99]"
       >
         <div className="flex items-center gap-2 flex-1 flex-wrap">
           {totalItems === 0 ? (
             <span className="text-muted-foreground">Tap to select products...</span>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-pink text-primary-foreground text-xs font-bold">{totalItems}</span>
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-pink text-primary-foreground text-xs font-bold">
+                {totalItems}
+              </span>
               <span className="text-foreground font-medium">product{totalItems > 1 ? 's' : ''} selected</span>
             </div>
           )}
         </div>
-        {isOpen ? <ChevronUp size={18} className="text-muted-foreground flex-shrink-0" /> : <ChevronDown size={18} className="text-muted-foreground flex-shrink-0" />}
+        {isOpen ? (
+          <ChevronUp size={18} className="text-muted-foreground flex-shrink-0" />
+        ) : (
+          <ChevronDown size={18} className="text-muted-foreground flex-shrink-0" />
+        )}
       </button>
 
-      {/* Dropdown */}
+      <AnimatePresence>
+        {isOpen && isMobile && (
+          <motion.button
+            type="button"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-[60] bg-foreground/20 backdrop-blur-[2px]"
+            aria-label="Close products selector"
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -94,13 +176,36 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-50 top-full left-0 right-0 mt-2 rounded-2xl border border-border bg-background shadow-2xl max-h-[65vh] overflow-hidden flex flex-col"
+            className={
+              isMobile
+                ? 'fixed inset-x-3 top-24 bottom-3 z-[70] rounded-2xl border border-border bg-background shadow-2xl overflow-hidden flex flex-col'
+                : 'absolute z-50 top-full left-0 right-0 mt-2 rounded-2xl border border-border bg-background shadow-2xl max-h-[70vh] overflow-hidden flex flex-col'
+            }
           >
-            {/* Categories - horizontal scroll */}
+            {isMobile && (
+              <div className="flex items-center justify-between p-3 border-b border-border bg-muted/20">
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Select Products</p>
+                  <p className="text-xs text-muted-foreground">Choose items, then tap done</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center"
+                  aria-label="Close selector"
+                >
+                  <X size={14} className="text-muted-foreground" />
+                </button>
+              </div>
+            )}
+
             <div className="flex overflow-x-auto gap-1.5 p-2.5 border-b border-border bg-muted/30 scrollbar-hide">
               <button
                 type="button"
-                onClick={() => { setActiveCategory(null); setShowCustomHamper(false); }}
+                onClick={() => {
+                  setActiveCategory(null);
+                  setShowCustomHamper(false);
+                }}
                 className={`flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
                   !activeCategory && !showCustomHamper
                     ? 'bg-rose-pink text-primary-foreground shadow-sm'
@@ -109,15 +214,19 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
               >
                 All
               </button>
-              {productData.categories.map(cat => {
-                const count = selectedProducts.filter(p =>
-                  getProductsByCategory(cat.id).some(cp => cp.id === p.id)
+              {visibleCategories.map((cat) => {
+                const count = selectedProducts.filter((p) =>
+                  productData.products.some((cp) => cp.category === cat.id && cp.id === p.id)
                 ).length;
+
                 return (
                   <button
                     key={cat.id}
                     type="button"
-                    onClick={() => { setActiveCategory(cat.id); setShowCustomHamper(false); }}
+                    onClick={() => {
+                      setActiveCategory(cat.id);
+                      setShowCustomHamper(false);
+                    }}
                     className={`flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
                       activeCategory === cat.id
                         ? 'bg-rose-pink text-primary-foreground shadow-sm'
@@ -133,10 +242,13 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                   </button>
                 );
               })}
-              {/* Custom Hamper Tab */}
+
               <button
                 type="button"
-                onClick={() => { setShowCustomHamper(true); setActiveCategory(null); }}
+                onClick={() => {
+                  setShowCustomHamper(true);
+                  setActiveCategory(null);
+                }}
                 className={`flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1 ${
                   showCustomHamper
                     ? 'bg-rose-pink text-primary-foreground shadow-sm'
@@ -147,7 +259,21 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
               </button>
             </div>
 
-            {/* Product List or Custom Hamper Builder */}
+            {!showCustomHamper && (
+              <div className="px-2.5 py-2 border-b border-border bg-background/95">
+                <div className="relative">
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search products..."
+                    className="w-full h-9 pl-9 pr-3 rounded-lg bg-muted/40 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-rose-pink/50"
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="overflow-y-auto flex-1 p-2 max-h-[45vh]">
               {showCustomHamper ? (
                 <div className="p-3 space-y-3">
@@ -156,6 +282,7 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                     <h4 className="font-display font-bold text-foreground text-sm">Build Your Custom Hamper</h4>
                     <p className="text-xs text-muted-foreground mt-1">Add any item you'd like — we'll curate it for you!</p>
                   </div>
+
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -169,13 +296,14 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                       onChange={(e) => setCustomItemQty(e.target.value)}
                       className="h-10 px-2 rounded-xl bg-muted/50 border border-border text-xs text-foreground focus:outline-none"
                     >
-                      <option value="250 gm">250g</option>
-                      <option value="500 gm">500g</option>
+                      <option value="250 gm">250 gm</option>
+                      <option value="500 gm">500 gm</option>
                       <option value="1 kg">1 kg</option>
                       <option value="2 kg">2 kg</option>
                       <option value="custom">Custom</option>
                     </select>
                   </div>
+
                   <button
                     type="button"
                     onClick={addCustomItem}
@@ -184,13 +312,20 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                   >
                     <Plus size={14} /> Add to Hamper
                   </button>
-                  {selectedProducts.filter(p => p.isCustomItem).length > 0 && (
+
+                  {customItems.length > 0 && (
                     <div className="space-y-1.5 pt-2 border-t border-border">
                       <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Custom Items</p>
-                      {selectedProducts.filter(p => p.isCustomItem).map(p => (
+                      {customItems.map((p) => (
                         <div key={p.id} className="flex items-center justify-between py-1.5 px-2 rounded-lg bg-muted/30">
-                          <span className="text-xs text-foreground">{p.name} ({p.quantity})</span>
-                          <button type="button" onClick={() => removeProduct(p.id)} className="text-muted-foreground hover:text-destructive">
+                          <span className="text-xs text-foreground">
+                            {p.name} ({p.quantity})
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => removeProduct(p.id)}
+                            className="text-muted-foreground hover:text-destructive"
+                          >
                             <X size={12} />
                           </button>
                         </div>
@@ -200,12 +335,10 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                 </div>
               ) : (
                 <div className="space-y-0.5">
-                  {(activeCategory
-                    ? [productData.categories.find(c => c.id === activeCategory)!]
-                    : productData.categories
-                  ).map(cat => {
+                  {categoriesToRender.map((cat) => {
                     const products = getProductsByCategory(cat.id);
                     if (!products.length) return null;
+
                     return (
                       <div key={cat.id}>
                         {!activeCategory && (
@@ -213,8 +346,9 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                             {cat.name}
                           </div>
                         )}
-                        {products.map(product => {
+                        {products.map((product) => {
                           const selected = isSelected(product.id);
+
                           return (
                             <button
                               key={product.id}
@@ -226,9 +360,11 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                                   : 'hover:bg-muted/50 border border-transparent'
                               }`}
                             >
-                              <div className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                                selected ? 'bg-rose-pink border-rose-pink scale-110' : 'border-border'
-                              }`}>
+                              <div
+                                className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                                  selected ? 'bg-rose-pink border-rose-pink scale-110' : 'border-border'
+                                }`}
+                              >
                                 {selected && <Check size={12} className="text-primary-foreground" />}
                               </div>
                               <div className="flex-1 min-w-0">
@@ -242,28 +378,32 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                       </div>
                     );
                   })}
+
+                  {categoriesToRender.every((cat) => getProductsByCategory(cat.id).length === 0) && (
+                    <div className="py-10 text-center text-sm text-muted-foreground">
+                      No products found for “{searchTerm.trim()}”.
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Footer */}
             <div className="border-t border-border p-2.5 bg-muted/20">
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={closeDropdown}
                 className="w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-pink to-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity shadow-md active:scale-[0.98]"
               >
-                Done ({totalItems} selected)
+                {isMobile && totalItems > 0 ? `Done & Continue (${totalItems})` : `Done (${totalItems} selected)`}
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Selected Products Summary */}
       {selectedProducts.length > 0 && (
         <div className="mt-3 space-y-2">
-          {selectedProducts.map(sp => (
+          {selectedToRender.map((sp) => (
             <motion.div
               key={sp.id}
               initial={{ opacity: 0, y: -4 }}
@@ -276,10 +416,12 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
               ) : (
                 <Package size={14} className="text-rose-pink flex-shrink-0" />
               )}
+
               <div className="flex-1 min-w-0">
                 <div className="text-xs font-semibold text-foreground truncate">{sp.name}</div>
                 <div className="text-[10px] text-muted-foreground">{sp.price}</div>
               </div>
+
               <select
                 value={sp.quantity}
                 onChange={(e) => updateQuantity(sp.id, e.target.value)}
@@ -293,6 +435,7 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
                 <option value="10 kg">10 kg</option>
                 <option value="custom">Custom</option>
               </select>
+
               <button
                 type="button"
                 onClick={() => removeProduct(sp.id)}
@@ -302,6 +445,16 @@ export default function ProductSelector({ selectedProducts, onChange }: ProductS
               </button>
             </motion.div>
           ))}
+
+          {isMobile && selectedProducts.length > 3 && (
+            <button
+              type="button"
+              onClick={() => setShowAllSelected((prev) => !prev)}
+              className="w-full text-xs font-medium text-rose-pink py-1"
+            >
+              {showAllSelected ? 'Show fewer selected items' : `View all ${selectedProducts.length} selected items`}
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from './button';
-import { ShoppingBag, ImageIcon } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -36,7 +36,15 @@ export default function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           className="w-full h-full object-cover"
           onError={(e) => {
-            const target = e.target as HTMLImageElement;
+            const target = e.currentTarget;
+            const triedHamperFallback = target.dataset.hamperFallback === 'true';
+
+            if (product.category === 'gift-hampers' && !triedHamperFallback) {
+              target.dataset.hamperFallback = 'true';
+              target.src = `/images/hampers/${product.image}`;
+              return;
+            }
+
             target.style.display = 'none';
             const parent = target.parentElement;
             if (parent) {
